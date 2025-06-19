@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Namz Ajz - Premium TikTok Downloader</title>
+    <meta name="description" content="Download TikTok videos without watermark - single, multiple, or bulk profile downloads">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Theme Colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0F172A',
+                        secondary: '#2563EB',
+                        accent: '#10B981',
+                        dark: '#1E293B',
+                        light: '#F1F5F9'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-light text-dark font-sans">
+    <!-- Header -->
+    <header class="bg-white shadow sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="text-secondary font-bold text-xl flex items-center">
+                <i class="fas fa-rocket mr-2"></i> Namz Ajz
+            </a>
+            <div class="space-x-6 hidden md:flex">
+                <a href="#" class="text-gray-600 hover:text-secondary font-medium">Home</a>
+                <a href="#" class="text-gray-600 hover:text-secondary font-medium">Comparison</a>
+                <a href="#" class="text-gray-600 hover:text-secondary font-medium">Instagram</a>
+                <a href="#" class="text-gray-600 hover:text-secondary font-medium">Telegram</a>
+                <a href="#" class="text-gray-600 hover:text-secondary font-medium">Affiliate</a>
+                <a href="#" class="bg-secondary text-white px-5 py-2 rounded-full hover:bg-blue-700 transition">Login</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="text-center py-16 px-4 bg-gradient-to-b from-secondary to-blue-400 text-white">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Advanced TikTok Downloader</h1>
+        <p class="max-w-2xl mx-auto text-lg">Download videos from TikTok without watermark. Single, multiple, or full profile in one click!</p>
+    </section>
+
+    <!-- Tools Section -->
+    <section class="max-w-5xl mx-auto px-4 py-10">
+        <div class="bg-white rounded-2xl shadow-lg p-8">
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold mb-2"><i class="fas fa-video text-secondary mr-2"></i>TikTok Downloader</h2>
+                <div class="flex space-x-4 border-b mb-4">
+                    <button class="tab-btn px-4 py-2 text-secondary border-b-2 border-secondary" data-tab="single">Single</button>
+                    <button class="tab-btn px-4 py-2 text-gray-600 hover:text-secondary" data-tab="multiple">Multiple</button>
+                    <button class="tab-btn px-4 py-2 text-gray-600 hover:text-secondary" data-tab="profile">Profile</button>
+                </div>
+            </div>
+
+            <!-- Tab Content -->
+            <div id="single" class="tab-content">
+                <p class="mb-4 text-gray-600">Paste a TikTok video URL below to download it in HD without watermark.</p>
+                <div class="flex gap-4">
+                    <input id="tiktokUrl" type="text" placeholder="Enter TikTok URL" class="w-full border rounded-full px-4 py-3 focus:outline-none focus:ring-2 focus:ring-secondary">
+                    <button id="downloadBtn" class="bg-secondary text-white px-6 py-3 rounded-full hover:bg-blue-700 transition flex items-center gap-2">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                </div>
+            </div>
+
+            <div id="multiple" class="tab-content hidden">
+                <p class="mb-4 text-gray-600">Paste multiple TikTok URLs (one per line) to download in batch.</p>
+                <textarea id="multipleUrls" class="w-full border rounded-lg px-4 py-3 mb-4" rows="5" placeholder="Paste URLs here..."></textarea>
+                <button id="downloadMultipleBtn" class="bg-secondary text-white px-6 py-3 rounded-full hover:bg-blue-700 transition flex items-center gap-2">
+                    <i class="fas fa-download"></i> Download All
+                </button>
+                <div id="multipleProgress" class="mt-4 hidden">
+                    <div class="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                        <div id="multipleProgressBar" class="h-2 bg-secondary w-0"></div>
+                    </div>
+                    <p id="multipleStatus" class="text-sm mt-2 text-gray-500">Preparing downloads...</p>
+                </div>
+            </div>
+
+            <div id="profile" class="tab-content hidden">
+                <p class="mb-4 text-gray-600">Enter a TikTok username to fetch all available videos.</p>
+                <div class="flex gap-4">
+                    <input id="profileUsername" type="text" placeholder="Enter username (without @)" class="w-full border rounded-full px-4 py-3 focus:outline-none focus:ring-2 focus:ring-secondary">
+                    <button id="downloadProfileBtn" class="bg-secondary text-white px-6 py-3 rounded-full hover:bg-blue-700 transition flex items-center gap-2">
+                        <i class="fas fa-download"></i> Fetch
+                    </button>
+                </div>
+                <div id="profileResults" class="mt-6 hidden">
+                    <h4 class="text-lg font-medium mb-2">Available Videos</h4>
+                    <div id="profileVideoList" class="space-y-3"></div>
+                    <button id="downloadProfileVideosBtn" class="mt-4 bg-secondary text-white px-6 py-3 rounded-full hover:bg-blue-700 transition flex items-center gap-2">
+                        <i class="fas fa-download"></i> Download All
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="grid md:grid-cols-3 gap-6 mt-12">
+            <div class="bg-white shadow rounded-xl p-6 text-center hover:shadow-lg transition">
+                <i class="fas fa-bolt text-3xl text-accent mb-2"></i>
+                <h3 class="font-semibold text-lg">Lightning Fast</h3>
+                <p class="text-gray-500">Optimized backend ensures high-speed video fetching.</p>
+            </div>
+            <div class="bg-white shadow rounded-xl p-6 text-center hover:shadow-lg transition">
+                <i class="fas fa-tasks text-3xl text-accent mb-2"></i>
+                <h3 class="font-semibold text-lg">Bulk Downloads</h3>
+                <p class="text-gray-500">Download entire profiles or many videos at once with progress tracking.</p>
+            </div>
+            <div class="bg-white shadow rounded-xl p-6 text-center hover:shadow-lg transition">
+                <i class="fas fa-mobile-alt text-3xl text-accent mb-2"></i>
+                <h3 class="font-semibold text-lg">Mobile Ready</h3>
+                <p class="text-gray-500">Fully responsive design works flawlessly on all devices.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-6 text-center mt-12">
+        <p>&copy; 2025 Namz Ajz. All rights reserved.</p>
+        <div class="mt-2 space-x-4">
+            <a href="#" class="text-light hover:text-secondary"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="text-light hover:text-secondary"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-light hover:text-secondary"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        document.querySelectorAll('.tab-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('text-secondary', 'border-b-2', 'border-secondary');
+                    btn.classList.add('text-gray-600');
+                });
+                document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+                const tab = button.getAttribute('data-tab');
+                document.getElementById(tab).classList.remove('hidden');
+                button.classList.add('text-secondary', 'border-b-2', 'border-secondary');
+                button.classList.remove('text-gray-600');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Tools | Namz Ajz</title>
+    <meta name="description" content="Powerful WhatsApp tools for bulk messaging, automation, and analytics">
+    
+    <!-- Reuse the same assets from index.html -->
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --secondary: #4D44DB;
+            --dark: #2A2A3C;
+            --light: #F8F9FA;
+            --success: #28A745;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(108, 99, 255, 0.3);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: #666;
+        }
+        
+        .tool-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+        
+        .tool-card h2 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .input-group input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+            transition: border 0.3s;
+        }
+        
+        .input-group input:focus {
+            border-color: var(--primary);
+        }
+        
+        .result-container {
+            margin-top: 2rem;
+            display: none;
+        }
+        
+        .video-preview {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .input-group {
+                flex-direction: column;
+            }
+        }
+        :root {
+            --primary: #6C63FF;
+            --secondary: #4D44DB;
+            --dark: #2A2A3C;
+            --light: #F8F9FA;
+            --whatsapp: #25D366;
+        }
+        
+        /* WhatsApp-specific styles */
+        .whatsapp-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .whatsapp-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--whatsapp);
+        }
+        
+        .whatsapp-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: #666;
+        }
+        
+        .tool-tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tool-tab {
+            padding: 0.8rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: #666;
+            position: relative;
+        }
+        
+        .tool-tab.active {
+            color: var(--whatsapp);
+        }
+        
+        .tool-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--whatsapp);
+        }
+        
+        .tool-content {
+            display: none;
+        }
+        
+        .tool-content.active {
+            display: block;
+        }
+        
+        .form-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input, 
+        .form-group textarea, 
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+        }
+        
+        .btn-whatsapp {
+            background-color: var(--whatsapp);
+            color: white;
+        }
+        
+        .btn-whatsapp:hover {
+            background-color: #128C7E;
+        }
+        
+        .contact-list {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-item {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+        
+        .contact-checkbox {
+            margin-right: 1rem;
+        }
+        
+        .contact-name {
+            flex: 1;
+        }
+        
+        .result-container {
+            display: none;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            border-left: 4px solid var(--whatsapp);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .stat-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--whatsapp);
+            margin: 0.5rem 0;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .template-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .template-preview {
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f5f5f5;
+        }
+        
+        .template-info {
+            padding: 1rem;
+        }
+        
+        .template-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.3rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            background-color: #f0f0f0;
+            color: #666;
+        }
+        
+        .badge-business {
+            background-color: #DCF8C6;
+            color: #075E54;
+        }
+        
+        .badge-personal {
+            background-color: #ECE5DD;
+            color: #4B4B4B;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <i class="fas fa-rocket"></i>
+                <span>Namz Ajz</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="comparison.html">Comparison</a>
+                <a href="instagram.html">Instagram</a>
+                <a href="telegram.html">Telegram</a>
+                <a href="whatsapp.html" class="active">WhatsApp</a>
+                <a href="affiliate.html">Affiliate</a>
+                <a href="#" class="btn">Login</a>
+            </div>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <section class="whatsapp-header">
+            <h1><i class="fab fa-whatsapp"></i> WhatsApp Tools</h1>
+            <p>Powerful utilities for WhatsApp marketing, automation, and business communication</p>
+        </section>
+        
+        <div class="tool-tabs">
+            <button class="tool-tab active" data-tab="bulk-messenger">Bulk Messenger</button>
+            <button class="tool-tab" data-tab="auto-reply">Auto Reply</button>
+            <button class="tool-tab" data-tab="templates">Message Templates</button>
+            <button class="tool-tab" data-tab="analytics">Analytics</button>
+        </div>
+        
+        <!-- Bulk Messenger Tab -->
+        <div class="tool-content active" id="bulk-messenger">
+            <div class="form-card">
+                <h2><i class="fas fa-paper-plane"></i> WhatsApp Bulk Messenger</h2>
+                <p>Send personalized messages to multiple contacts at once</p>
+                
+                <div class="form-group">
+                    <label for="contacts">Select Contacts</label>
+                    <div class="contact-list">
+                        <div class="contact-item">
+                            <input type="checkbox" class="contact-checkbox" checked>
+                            <div class="contact-name">John Doe (+1 234-567-8901)</div>
+                        </div>
+                        <div class="contact-item">
+                            <input type="checkbox" class="contact-checkbox" checked>
+                            <div class="contact-name">Jane Smith (+1 987-654-3210)</div>
+                        </div>
+                        <div class="contact-item">
+                            <input type="checkbox" class="contact-checkbox" checked>
+                            <div class="contact-name">Acme Corp (+1 555-123-4567)</div>
+                        </div>
+                        <div class="contact-item">
+                            <input type="checkbox" class="contact-checkbox">
+                            <div class="contact-name">Mike Johnson (+1 444-555-6666)</div>
+                        </div>
+                        <div class="contact-item">
+                            <input type="checkbox" class="contact-checkbox">
+                            <div class="contact-name">Sarah Williams (+1 777-888-9999)</div>
+                        </div>
+                    </div>
+                    <button class="btn" style="margin-right: 0.5rem;">
+                        <i class="fas fa-plus"></i> Add Contacts
+                    </button>
+                    <button class="btn">
+                        <i class="fas fa-upload"></i> Import CSV
+                    </button>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message-content">Message Content</label>
+                    <textarea id="message-content" placeholder="Type your message here..."></textarea>
+                    <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                        <button class="btn">
+                            <i class="fas fa-bold"></i>
+                        </button>
+                        <button class="btn">
+                            <i class="fas fa-italic"></i>
+                        </button>
+                        <button class="btn">
+                            <i class="fas fa-link"></i>
+                        </button>
+                        <button class="btn">
+                            <i class="fas fa-smile"></i>
+                        </button>
+                        <button class="btn">
+                            <i class="fas fa-image"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" checked>
+                        Personalize messages with contact names
+                    </label>
+                </div>
+                
+                <button class="btn btn-whatsapp" id="send-bulk">
+                    <i class="fab fa-whatsapp"></i> Send Messages
+                </button>
+                
+                <div class="result-container" id="bulk-result">
+                    <h3>Messages Sent Successfully!</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value">3</div>
+                            <div class="stat-label">Contacts</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">100%</div>
+                            <div class="stat-label">Success Rate</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">0</div>
+                            <div class="stat-label">Failures</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Auto Reply Tab -->
+        <div class="tool-content" id="auto-reply">
+            <div class="form-card">
+                <h2><i class="fas fa-reply"></i> WhatsApp Auto Reply</h2>
+                <p>Set up automatic responses to incoming messages</p>
+                
+                <div class="form-group">
+                    <label for="trigger-keywords">Trigger Keywords</label>
+                    <input type="text" id="trigger-keywords" placeholder="hello, hi, help, support">
+                    <small>Separate multiple keywords with commas</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="auto-response">Automatic Response</label>
+                    <textarea id="auto-response" placeholder="Type your automatic response..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="response-delay">Response Delay (seconds)</label>
+                    <input type="number" id="response-delay" value="5" min="0" max="60">
+                </div>
+                
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" checked>
+                        Activate auto-reply
+                    </label>
+                </div>
+                
+                <button class="btn btn-whatsapp" id="save-auto-reply">
+                    <i class="fas fa-save"></i> Save Auto Reply
+                </button>
+                
+                <div class="result-container" id="auto-reply-result">
+                    <h3>Auto Reply Activated!</h3>
+                    <p>Your automatic response will be sent when customers message you with the specified keywords.</p>
+                    <div style="margin-top: 1rem; padding: 1rem; background-color: #f5f5f5; border-radius: 5px;">
+                        <strong>Test it out:</strong> Send "hello" to your WhatsApp Business number to see the auto-reply in action.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Message Templates Tab -->
+        <div class="tool-content" id="templates">
+            <div class="form-card">
+                <h2><i class="fas fa-clipboard-list"></i> WhatsApp Message Templates</h2>
+                <p>Create and manage approved message templates for your WhatsApp Business account</p>
+                
+                <button class="btn btn-whatsapp" style="margin-bottom: 1.5rem;">
+                    <i class="fas fa-plus"></i> New Template
+                </button>
+                
+                <div class="template-grid">
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <div style="text-align: center;">
+                                <div style="font-weight: 500; margin-bottom: 0.5rem;">Order Confirmation</div>
+                                <div style="color: #666; font-size: 0.9rem;">Hello {{1}}, your order #{{2}} has been confirmed!</div>
+                            </div>
+                        </div>
+                        <div class="template-info">
+                            <div style="display: flex; justify-content: space-between;">
+                                <div style="font-weight: 500;">Order Confirmation</div>
+                                <span class="badge badge-business">Business</span>
+                            </div>
+                            <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #666;">
+                                Last used: 2 days ago
+                            </div>
+                            <div class="template-actions">
+                                <button class="btn" style="flex: 1; padding: 0.5rem;">
+                                    <i class="far fa-edit"></i> Edit
+                                </button>
+                                <button class="btn" style="flex: 1; padding: 0.5rem;">
+                                    <i class="fas fa-paper-plane"></i> Use
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <div style="text-align: center;">
+                                <div style="font-weight: 500; margin-bottom: 0.5rem;">Appointment Reminder</div>
+                                <div style="color: #666; font-size: 0.9rem;">Reminder: Your appointment is tomorrow at {{1}}.</div>
+                            </div>
+                        </div>
+                        <div class="template-info">
+                            <div style="display: flex; justify-content: space-between;">
+                                <div style="font-weight: 500;">Appointment Reminder</div>
+                                <span class="badge badge-business">Business</span>
+                            </div>
+                            <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #666;">
+                                Last used: Today
+                            </div>
+                            <div class="template-actions">
+                                <button class="btn" style="flex: 1; padding: 0.5rem;">
+                                    <i class="far fa-edit"></i> Edit
+                                </button>
+                                <button class="btn" style="flex: 1; padding: 0.5rem;">
+                                    <i class="fas fa-paper-plane"></i> Use
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <div style="text-align: center;">
+                                <div style="font-weight: 500; margin-bottom: 0.5rem;">Festival Greeting</div>
+                                <div style="color: #666; font-size: 0.9rem;">Wishing you a happy {{1}}! 🎉</div>
+                            </div>
+                        </div>
+                        <div class="template-info">
+                            <div style="display: flex; justify-content: space-between;">
+                                <div style="font-weight: 500;">Festival Greeting</div>
+                                <span class="badge badge-personal">Personal</span>
+                            </div>
+                            <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #666;">
+                                Last used: 3 weeks ago
+                            </div>
+                            <div class="template-actions">
+                                <button class="btn" style="flex: 1; padding: 0.5rem;">
+                                    <i class="far fa-edit"></i> Edit
+                                </button>
+                                <button class="btn" style="flex: 1; padding: 0.5rem;">
+                                    <i class="fas fa-paper-plane"></i> Use
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Analytics Tab -->
+        <div class="tool-content" id="analytics">
+            <div class="form-card">
+                <h2><i class="fas fa-chart-bar"></i> WhatsApp Analytics</h2>
+                <p>Track your WhatsApp message performance and customer engagement</p>
+                
+                <div class="form-group">
+                    <label for="analytics-period">Select Time Period</label>
+                    <select id="analytics-period">
+                        <option>Last 7 days</option>
+                        <option selected>Last 30 days</option>
+                        <option>Last 90 days</option>
+                        <option>Custom range</option>
+                    </select>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">1,245</div>
+                        <div class="stat-label">Messages Sent</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">89%</div>
+                        <div class="stat-label">Read Rate</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">5.2 min</div>
+                        <div class="stat-label">Avg. Reply Time</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">42%</div>
+                        <div class="stat-label">Response Rate</div>
+                    </div>
+                </div>
+                
+                <div style="margin: 2rem 0;">
+                    <h3>Message Trends</h3>
+                    <div style="height: 300px; background-color: #f5f5f5; border-radius: 5px; display: flex; align-items: center; justify-content: center;">
+                        [Message volume chart would appear here]
+                    </div>
+                </div>
+                
+                <div>
+                    <h3>Top Performing Templates</h3>
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="background-color: #f3f3f3;">
+                                    <th style="padding: 0.8rem; text-align: left;">Template</th>
+                                    <th style="padding: 0.8rem; text-align: right;">Sent</th>
+                                    <th style="padding: 0.8rem; text-align: right;">Read</th>
+                                    <th style="padding: 0.8rem; text-align: right;">Replied</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid #eee;">
+                                    <td style="padding: 0.8rem;">Order Confirmation</td>
+                                    <td style="padding: 0.8rem; text-align: right;">328</td>
+                                    <td style="padding: 0.8rem; text-align: right;">312 (95%)</td>
+                                    <td style="padding: 0.8rem; text-align: right;">142 (43%)</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #eee;">
+                                    <td style="padding: 0.8rem;">Shipping Update</td>
+                                    <td style="padding: 0.8rem; text-align: right;">276</td>
+                                    <td style="padding: 0.8rem; text-align: right;">253 (92%)</td>
+                                    <td style="padding: 0.8rem; text-align: right;">89 (32%)</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #eee;">
+                                    <td style="padding: 0.8rem;">Appointment Reminder</td>
+                                    <td style="padding: 0.8rem; text-align: right;">198</td>
+                                    <td style="padding: 0.8rem; text-align: right;">187 (94%)</td>
+                                    <td style="padding: 0.8rem; text-align: right;">67 (34%)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2023 Namz Ajz. All rights reserved.</p>
+        <div style="margin-top: 1rem;">
+            <a href="#" style="color: white; margin: 0 10px;"><i class="fab fa-facebook"></i></a>
+            <a href="#" style="color: white; margin: 0 10px;"><i class="fab fa-twitter"></i></a>
+            <a href="#" style="color: white; margin: 0 10px;"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" style="color: white; margin: 0 10px;"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab functionality
+            const tabBtns = document.querySelectorAll('.tool-tab');
+            const tabContents = document.querySelectorAll('.tool-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    btn.classList.add('active');
+                    const tabId = btn.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Bulk Messenger
+            const sendBulkBtn = document.getElementById('send-bulk');
+            const bulkResult = document.getElementById('bulk-result');
+            
+            sendBulkBtn.addEventListener('click', function() {
+                const messageContent = document.getElementById('message-content').value.trim();
+                
+                if (!messageContent) {
+                    alert('Please enter a message');
+                    return;
+                }
+                
+                // Show loading state
+                sendBulkBtn.disabled = true;
+                sendBulkBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                
+                // Simulate sending
+                setTimeout(() => {
+                    bulkResult.style.display = 'block';
+                    sendBulkBtn.disabled = false;
+                    sendBulkBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Send Messages';
+                    
+                    // Scroll to results
+                    bulkResult.scrollIntoView({ behavior: 'smooth' });
+                }, 2000);
+            });
+            
+            // Auto Reply
+            const saveAutoReplyBtn = document.getElementById('save-auto-reply');
+            const autoReplyResult = document.getElementById('auto-reply-result');
+            
+            saveAutoReplyBtn.addEventListener('click', function() {
+                const keywords = document.getElementById('trigger-keywords').value.trim();
+                const response = document.getElementById('auto-response').value.trim();
+                
+                if (!keywords || !response) {
+                    alert('Please enter both keywords and response');
+                    return;
+                }
+                
+                // Show loading state
+                saveAutoReplyBtn.disabled = true;
+                saveAutoReplyBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+                
+                // Simulate saving
+                setTimeout(() => {
+                    autoReplyResult.style.display = 'block';
+                    saveAutoReplyBtn.disabled = false;
+                    saveAutoReplyBtn.innerHTML = '<i class="fas fa-save"></i> Save Auto Reply';
+                    
+                    // Scroll to results
+                    autoReplyResult.scrollIntoView({ behavior: 'smooth' });
+                }, 1500);
+            });
+        });
+    </script>
+</body>
+</html>

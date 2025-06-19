@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affiliate Marketing | Namz Ajz</title>
+    <meta name="description" content="Earn money with our affiliate programs - EarnKaro, Extra PE, and Amazon Associates">
+    
+    <!-- Reuse the same assets from index.html -->
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --secondary: #4D44DB;
+            --dark: #2A2A3C;
+            --light: #F8F9FA;
+            --success: #28A745;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(108, 99, 255, 0.3);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: #666;
+        }
+        
+        .tool-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+        
+        .tool-card h2 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .input-group input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+            transition: border 0.3s;
+        }
+        
+        .input-group input:focus {
+            border-color: var(--primary);
+        }
+        
+        .result-container {
+            margin-top: 2rem;
+            display: none;
+        }
+        
+        .video-preview {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .input-group {
+                flex-direction: column;
+            }
+        }
+        :root {
+            --primary: #6C63FF;
+            --secondary: #4D44DB;
+            --dark: #2A2A3C;
+            --light: #F8F9FA;
+            --success: #28A745;
+            --earnkaro: #FF6B6B;
+            --extra-pe: #4ECDC4;
+            --amazon: #FF9900;
+        }
+        
+        /* Affiliate-specific styles */
+        .affiliate-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .affiliate-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .affiliate-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: #666;
+        }
+        
+        .affiliate-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .affiliate-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s;
+            border-top: 4px solid var(--primary);
+        }
+        
+        .affiliate-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .affiliate-card.earnkaro {
+            border-top-color: var(--earnkaro);
+        }
+        
+        .affiliate-card.extra-pe {
+            border-top-color: var(--extra-pe);
+        }
+        
+        .affiliate-card.amazon {
+            border-top-color: var(--amazon);
+        }
+        
+        .affiliate-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .earnkaro-icon {
+            color: var(--earnkaro);
+        }
+        
+        .extra-pe-icon {
+            color: var(--extra-pe);
+        }
+        
+        .amazon-icon {
+            color: var(--amazon);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+        
+        .stat-item {
+            padding: 1rem;
+            background-color: var(--light);
+            border-radius: 5px;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .how-it-works {
+            margin: 3rem 0;
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .step {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+            padding-left: 4rem;
+        }
+        
+        .step-number {
+            position: absolute;
+            left: 1.5rem;
+            top: 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        
+        .top-products {
+            margin: 3rem 0;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 150px;
+            object-fit: contain;
+            border-bottom: 1px solid #eee;
+            padding: 1rem;
+            background-color: var(--light);
+        }
+        
+        .product-info {
+            padding: 1rem;
+        }
+        
+        .product-title {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .product-price {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .product-commission {
+            font-size: 0.8rem;
+            color: var(--success);
+            margin-top: 0.3rem;
+        }
+        
+        .btn-affiliate {
+            display: block;
+            text-align: center;
+            margin-top: 0.5rem;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-affiliate:hover {
+            background-color: var(--secondary);
+        }
+        
+        .btn-earnkaro {
+            background-color: var(--earnkaro);
+        }
+        
+        .btn-extra-pe {
+            background-color: var(--extra-pe);
+        }
+        
+        .btn-amazon {
+            background-color: var(--amazon);
+        }
+        
+        .testimonials {
+            margin: 3rem 0;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .author-name {
+            font-weight: 600;
+        }
+        
+        .author-earnings {
+            font-size: 0.8rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <i class="fas fa-rocket"></i>
+                <span>Namz Ajz</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="comparison.html">Comparison</a>
+                <a href="instagram.html">Instagram</a>
+                <a href="affiliate.html" class="active">Affiliate</a>
+                <a href="#" class="btn">Login</a>
+            </div>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <div class="affiliate-header">
+            <h1><i class="fas fa-money-bill-wave"></i> Affiliate Marketing Hub</h1>
+            <p>Earn commissions by promoting products from top brands. Join our affiliate programs and start making money today!</p>
+        </div>
+        
+        <div class="affiliate-cards">
+            <div class="affiliate-card earnkaro">
+                <div class="affiliate-icon earnkaro-icon">
+                    <i class="fas fa-rupee-sign"></i>
+                </div>
+                <h2>EarnKaro</h2>
+                <p>Earn commissions from 100+ Indian brands including Myntra, Nykaa, and more</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">15-30%</div>
+                        <div class="stat-label">Commission</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">100+</div>
+                        <div class="stat-label">Brands</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">₹500+</div>
+                        <div class="stat-label">Avg. Order</div>
+                    </div>
+                </div>
+                
+                <a href="https://earnkaro.com" target="_blank" class="btn btn-affiliate btn-earnkaro">
+                    Join EarnKaro
+                </a>
+            </div>
+            
+            <div class="affiliate-card extra-pe">
+                <div class="affiliate-icon extra-pe-icon">
+                    <i class="fas fa-wallet"></i>
+                </div>
+                <h2>Extra PE</h2>
+                <p>Earn cashback and commissions from Flipkart, Amazon, and other major retailers</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">1-15%</div>
+                        <div class="stat-label">Commission</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">50+</div>
+                        <div class="stat-label">Retailers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">₹300+</div>
+                        <div class="stat-label">Avg. Order</div>
+                    </div>
+                </div>
+                
+                <a href="https://extra.pe" target="_blank" class="btn btn-affiliate btn-extra-pe">
+                    Join Extra PE
+                </a>
+            </div>
+            
+            <div class="affiliate-card amazon">
+                <div class="affiliate-icon amazon-icon">
+                    <i class="fab fa-amazon"></i>
+                </div>
+                <h2>Amazon Associates</h2>
+                <p>Earn up to 10% advertising fees on millions of Amazon products</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">1-10%</div>
+                        <div class="stat-label">Commission</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">1M+</div>
+                        <div class="stat-label">Products</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">₹1000+</div>
+                        <div class="stat-label">Avg. Order</div>
+                    </div>
+                </div>
+                
+                <a href="https://affiliate-program.amazon.com" target="_blank" class="btn btn-affiliate btn-amazon">
+                    Join Amazon
+                </a>
+            </div>
+        </div>
+        
+        <div class="how-it-works">
+            <h2>How It Works</h2>
+            <p>Start earning commissions in just 3 simple steps</p>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Sign Up</h3>
+                    <p>Register for free with our affiliate programs and get your unique referral links</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Share Links</h3>
+                    <p>Share your affiliate links on social media, websites, or with friends and family</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Earn Commissions</h3>
+                    <p>Get paid when people make purchases through your links</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="top-products">
+            <h2>Top Earning Products</h2>
+            <p>These products are currently generating the highest commissions</p>
+            
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="https://m.media-amazon.com/images/I/71TPda7cwUL._AC_UL320_.jpg" alt="OnePlus 10 Pro" class="product-image">
+                    <div class="product-info">
+                        <div class="product-title">OnePlus 10 Pro 5G (Volcanic Black, 12GB RAM, 256GB Storage)</div>
+                        <div class="product-price">₹66,999</div>
+                        <div class="product-commission">Earn ₹1,340 - ₹2,010</div>
+                        <a href="#" class="btn-affiliate">Get Link</a>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <img src="https://m.media-amazon.com/images/I/61Bv0K5iZ0L._AC_UL320_.jpg" alt="Boat Smartwatch" class="product-image">
+                    <div class="product-info">
+                        <div class="product-title">boAt Wave Call Smart Watch with Bluetooth Calling</div>
+                        <div class="product-price">₹1,799</div>
+                        <div class="product-commission">Earn ₹90 - ₹180</div>
+                        <a href="#" class="btn-affiliate">Get Link</a>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <img src="https://m.media-amazon.com/images/I/71geVdy6-OS._AC_UL320_.jpg" alt="Sony Headphones" class="product-image">
+                    <div class="product-info">
+                        <div class="product-title">Sony WH-CH720N Wireless Active Noise Cancelling Headphones</div>
+                        <div class="product-price">₹9,990</div>
+                        <div class="product-commission">Earn ₹500 - ₹1,000</div>
+                        <a href="#" class="btn-affiliate">Get Link</a>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <img src="https://m.media-amazon.com/images/I/61L5QgPvgxL._AC_UL320_.jpg" alt="Mi TV" class="product-image">
+                    <div class="product-info">
+                        <div class="product-title">Xiaomi 108 cm (43 inches) 4K Ultra HD Android Smart LED TV</div>
+                        <div class="product-price">₹26,999</div>
+                        <div class="product-commission">Earn ₹1,350 - ₹2,700</div>
+                        <a href="#" class="btn-affiliate">Get Link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="testimonials">
+            <h2>Success Stories</h2>
+            <p>See how others are earning with our affiliate programs</p>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "I started sharing affiliate links on my Instagram page and within 3 months I was making ₹25,000 per month passively. The best decision I ever made!"
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Priya K." class="author-avatar">
+                        <div>
+                            <div class="author-name">Priya K.</div>
+                            <div class="author-earnings">₹1,42,000 earned</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "As a college student, affiliate marketing helped me pay my tuition fees. I promote products through my blog and earn about ₹15,000 monthly."
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Rahul S." class="author-avatar">
+                        <div>
+                            <div class="author-name">Rahul S.</div>
+                            <div class="author-earnings">₹89,500 earned</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "I was skeptical at first, but after seeing my first ₹5,000 payment, I was hooked. Now I earn more from affiliates than my full-time job!"
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Ananya M." class="author-avatar">
+                        <div>
+                            <div class="author-name">Ananya M.</div>
+                            <div class="author-earnings">₹3,24,000 earned</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin: 3rem 0;">
+            <h2>Ready to Start Earning?</h2>
+            <p style="margin-bottom: 1.5rem;">Join our affiliate programs today and start making money</p>
+            <a href="#" class="btn" style="padding: 1rem 2rem; font-size: 1.1rem;">
+                <i class="fas fa-user-plus"></i> Sign Up Now
+            </a>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2023 Namz Ajz. All rights reserved.</p>
+        <div style="margin-top: 1rem;">
+            <a href="#" style="color: white; margin: 0 10px;"><i class="fab fa-facebook"></i></a>
+            <a href="#" style="color: white; margin: 0 10px;"><i class="fab fa-twitter"></i></a>
+            <a href="#" style="color: white; margin: 0 10px;"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // In production, you would:
+        // 1. Connect to affiliate APIs to get real-time product data
+        // 2. Implement user authentication
+        // 3. Track clicks and conversions
+        // 4. Generate personalized affiliate links
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // This would be replaced with actual API calls in production
+            console.log('Affiliate hub loaded');
+            
+            // Example of how you might handle affiliate link generation
+            const affiliateLinks = document.querySelectorAll('.btn-affiliate');
+            affiliateLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    if (!link.href || link.href === '#') {
+                        e.preventDefault();
+                        alert('In a production environment, this would generate your personalized affiliate link');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

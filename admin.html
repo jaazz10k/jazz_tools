@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Namz Ajz</title>
+    <meta name="description" content="Administration panel for managing Namz Ajz website">
+    
+    <!-- Reuse the same assets from index.html -->
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --secondary: #4D44DB;
+            --dark: #2A2A3C;
+            --light: #F8F9FA;
+            --success: #28A745;
+            --warning: #FFC107;
+            --danger: #DC3545;
+        }
+        
+        /* Admin-specific styles */
+        .admin-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            background-color: var(--dark);
+            color: white;
+            padding: 1.5rem 0;
+        }
+        
+        .sidebar-header {
+            padding: 0 1.5rem 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .sidebar-logo i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .admin-user {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1.5rem;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 5px;
+        }
+        
+        .admin-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .admin-name {
+            font-weight: 500;
+        }
+        
+        .admin-role {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        
+        .sidebar-menu {
+            margin-top: 1.5rem;
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        
+        .menu-item:hover, .menu-item.active {
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+        }
+        
+        .menu-item i {
+            width: 24px;
+            margin-right: 10px;
+            text-align: center;
+        }
+        
+        .menu-badge {
+            margin-left: auto;
+            background-color: var(--primary);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+        }
+        
+        .main-content {
+            background-color: #f5f7fa;
+            padding: 1.5rem;
+        }
+        
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .stat-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .stat-title {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        
+        .stat-growth {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        .stat-growth.up {
+            color: var(--success);
+        }
+        
+        .stat-growth.down {
+            color: var(--danger);
+        }
+        
+        .admin-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .table-responsive {
+            overflow-x: auto;
+        }
+        
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .admin-table th {
+            text-align: left;
+            padding: 0.8rem 1rem;
+            background-color: #f5f7fa;
+            font-weight: 500;
+            color: #666;
+        }
+        
+        .admin-table td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 0.3rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .status-active {
+            background-color: #e6f7ee;
+            color: var(--success);
+        }
+        
+        .status-pending {
+            background-color: #fff8e6;
+            color: var(--warning);
+        }
+        
+        .status-banned {
+            background-color: #feecec;
+            color: var(--danger);
+        }
+        
+        .action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+            font-size: 1rem;
+            margin: 0 0.3rem;
+        }
+        
+        .action-btn:hover {
+            color: var(--primary);
+        }
+        
+        .chart-container {
+            height: 300px;
+            margin-top: 1.5rem;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.3rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .badge-primary {
+            background-color: #e6e8ff;
+            color: var(--primary);
+        }
+        
+        .badge-success {
+            background-color: #e6f7ee;
+            color: var(--success);
+        }
+        
+        .badge-warning {
+            background-color: #fff8e6;
+            color: var(--warning);
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+        
+        .page-btn {
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 0.5rem 1rem;
+            margin: 0 0.3rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        
+        .page-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .search-bar {
+            display: flex;
+            margin-bottom: 1.5rem;
+        }
+        
+        .search-bar input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+        }
+        
+        .search-bar button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-rocket"></i>
+                    <span>Namz Ajz</span>
+                </div>
+                <div class="admin-user">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Admin" class="admin-avatar">
+                    <div>
+                        <div class="admin-name">Abdul Rahman</div>
+                        <div class="admin-role">Super Admin</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-menu">
+                <a href="#" class="menu-item active">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-users"></i>
+                    <span>Users</span>
+                    <span class="menu-badge">24</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-tools"></i>
+                    <span>Tools</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span>Affiliates</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="admin-header">
+                <div class="page-title">Admin Dashboard</div>
+                <div>
+                    <button class="btn" style="margin-right: 0.5rem;">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <button class="btn">
+                        <i class="fas fa-question-circle"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <div class="stat-title">Total Users</div>
+                    <div class="stat-value">1,245</div>
+                    <div class="stat-growth up">
+                        <i class="fas fa-arrow-up"></i> 12.5% from last month
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-title">Active Sessions</div>
+                    <div class="stat-value">328</div>
+                    <div class="stat-growth up">
+                        <i class="fas fa-arrow-up"></i> 5.3% from yesterday
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-title">Tools Used</div>
+                    <div class="stat-value">4,892</div>
+                    <div class="stat-growth down">
+                        <i class="fas fa-arrow-down"></i> 2.1% from last week
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-title">Revenue</div>
+                    <div class="stat-value">₹84,520</div>
+                    <div class="stat-growth up">
+                        <i class="fas fa-arrow-up"></i> 18.7% from last month
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin-section">
+                <div class="section-header">
+                    <div class="section-title">Recent Users</div>
+                    <a href="#" class="btn">View All</a>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="Search users...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Email</th>
+                                <th>Joined</th>
+                                <th>Status</th>
+                                <th>Plan</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 0.8rem;">
+                                        <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="User" class="user-avatar">
+                                        <div>Priya Sharma</div>
+                                    </div>
+                                </td>
+                                <td>priya.sharma@example.com</td>
+                                <td>2 days ago</td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                                <td><span class="badge badge-primary">Premium</span></td>
+                                <td>
+                                    <button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn" title="Message"><i class="fas fa-envelope"></i></button>
+                                    <button class="action-btn" title="Delete"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 0.8rem;">
+                                        <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="User" class="user-avatar">
+                                        <div>Rahul Patel</div>
+                                    </div>
+                                </td>
+                                <td>rahul.patel@example.com</td>
+                                <td>1 week ago</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                                <td><span class="badge">Free</span></td>
+                                <td>
+                                    <button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn" title="Message"><i class="fas fa-envelope"></i></button>
+                                    <button class="action-btn" title="Delete"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 0.8rem;">
+                                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="User" class="user-avatar">
+                                        <div>Ananya Gupta</div>
+                                    </div>
+                                </td>
+                                <td>ananya.g@example.com</td>
+                                <td>2 weeks ago</td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                                <td><span class="badge badge-primary">Premium</span></td>
+                                <td>
+                                    <button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn" title="Message"><i class="fas fa-envelope"></i></button>
+                                    <button class="action-btn" title="Delete"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 0.8rem;">
+                                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="user-avatar">
+                                        <div>Vikram Singh</div>
+                                    </div>
+                                </td>
+                                <td>vikram.s@example.com</td>
+                                <td>3 weeks ago</td>
+                                <td><span class="status-badge status-banned">Banned</span></td>
+                                <td><span class="badge">Free</span></td>
+                                <td>
+                                    <button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn" title="Message"><i class="fas fa-envelope"></i></button>
+                                    <button class="action-btn" title="Delete"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 0.8rem;">
+                                        <img src="https://randomuser.me/api/portraits/women/12.jpg" alt="User" class="user-avatar">
+                                        <div>Neha Kapoor</div>
+                                    </div>
+                                </td>
+                                <td>neha.k@example.com</td>
+                                <td>1 month ago</td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                                <td><span class="badge badge-success">Business</span></td>
+                                <td>
+                                    <button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn" title="Message"><i class="fas fa-envelope"></i></button>
+                                    <button class="action-btn" title="Delete"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="pagination">
+                    <button class="page-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="page-btn active">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                    <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+            
+            <div class="admin-section">
+                <div class="section-header">
+                    <div class="section-title">Website Analytics</div>
+                    <div>
+                        <select style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ddd;">
+                            <option>Last 7 days</option>
+                            <option selected>Last 30 days</option>
+                            <option>Last 90 days</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <!-- This would be replaced with a real chart in production -->
+                    <div style="height: 100%; display: flex; align-items: center; justify-content: center; background-color: #f5f7fa; border-radius: 5px;">
+                        <div style="text-align: center; color: #666;">
+                            <i class="fas fa-chart-line" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                            <div>Website traffic and usage chart would appear here</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin-section">
+                <div class="section-header">
+                    <div class="section-title">Recent Activities</div>
+                    <a href="#" class="btn">View All</a>
+                </div>
+                
+                <div style="max-height: 400px; overflow-y: auto;">
+                    <div style="display: flex; padding: 1rem 0; border-bottom: 1px solid #eee;">
+                        <div style="margin-right: 1rem; color: var(--primary);">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div>
+                            <div><strong>Priya Sharma</strong> signed up for a Premium account</div>
+                            <div style="font-size: 0.8rem; color: #666;">2 hours ago</div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; padding: 1rem 0; border-bottom: 1px solid #eee;">
+                        <div style="margin-right: 1rem; color: var(--success);">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <div>
+                            <div>New payment received from <strong>Ananya Gupta</strong> (₹999)</div>
+                            <div style="font-size: 0.8rem; color: #666;">5 hours ago</div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; padding: 1rem 0; border-bottom: 1px solid #eee;">
+                        <div style="margin-right: 1rem; color: var(--warning);">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div>
+                            <div><strong>Vikram Singh</strong> was banned for violating terms</div>
+                            <div style="font-size: 0.8rem; color: #666;">1 day ago</div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; padding: 1rem 0; border-bottom: 1px solid #eee;">
+                        <div style="margin-right: 1rem; color: var(--primary);">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <div>
+                            <div><strong>Rahul Patel</strong> used the TikTok Downloader tool</div>
+                            <div style="font-size: 0.8rem; color: #666;">2 days ago</div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; padding: 1rem 0;">
+                        <div style="margin-right: 1rem; color: var(--danger);">
+                            <i class="fas fa-user-slash"></i>
+                        </div>
+                        <div>
+                            <div><strong>Neha Kapoor</strong> canceled her Business subscription</div>
+                            <div style="font-size: 0.8rem; color: #666;">3 days ago</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // In production, you would:
+        // 1. Connect to admin APIs to fetch real data
+        // 2. Implement user authentication and authorization
+        // 3. Add functionality for all admin actions
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Admin dashboard loaded');
+            
+            // Example of how you might handle user actions
+            const actionButtons = document.querySelectorAll('.action-btn');
+            actionButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const action = this.title;
+                    console.log(`${action} action clicked`);
+                    // In production, this would trigger API calls
+                });
+            });
+            
+            // This would be replaced with a real chart library like Chart.js
+            // Example: https://www.chartjs.org/
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Tools | Namz Ajz</title>
+    <meta name="description" content="Generate perfect Instagram captions, find trending hashtags, and analyze your posts">
+    
+    <!-- Reuse the same assets from index.html -->
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --secondary: #4D44DB;
+            --dark: #2A2A3C;
+            --light: #F8F9FA;
+            --success: #28A745;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(108, 99, 255, 0.3);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: #666;
+        }
+        
+        .tool-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+        
+        .tool-card h2 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .input-group input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+            transition: border 0.3s;
+        }
+        
+        .input-group input:focus {
+            border-color: var(--primary);
+        }
+        
+        .result-container {
+            margin-top: 2rem;
+            display: none;
+        }
+        
+        .video-preview {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .input-group {
+                flex-direction: column;
+            }
+        }
+        :root {
+            --primary: #6C63FF;
+            --secondary: #4D44DB;
+            --dark: #2A2A3C;
+            --light: #F8F9FA;
+            --success: #28A745;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        /* Add Instagram-specific styles */
+        .tool-section {
+            margin: 2rem 0;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tab-btn {
+            padding: 0.8rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: #666;
+            position: relative;
+        }
+        
+        .tab-btn.active {
+            color: var(--primary);
+        }
+        
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            min-height: 150px;
+            margin-bottom: 1rem;
+            resize: vertical;
+        }
+        
+        .result-box {
+            background-color: white;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .hashtag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .hashtag {
+            background-color: #f3f3ff;
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .hashtag:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .copy-btn {
+            background-color: var(--light);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .copy-btn:hover {
+            background-color: #e9ecef;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <i class="fas fa-rocket"></i>
+                <span>Namz Ajz</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="comparison.html">Comparison</a>
+                <a href="instagram.html" class="active">Instagram</a>
+                <a href="affiliate.html">Affiliate</a>
+                <a href="#" class="btn">Login</a>
+            </div>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <section class="hero">
+            <h1><i class="fas fa-camera-retro"></i> Instagram Tools</h1>
+            <p>Enhance your Instagram presence with our powerful toolkit for creators</p>
+        </section>
+        
+        <div class="tool-card">
+            <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="caption">Caption Generator</button>
+                <button class="tab-btn" data-tab="hashtag">Hashtag Finder</button>
+                <button class="tab-btn" data-tab="analyzer">Post Analyzer</button>
+            </div>
+            
+            <!-- Caption Generator Tab -->
+            <div class="tab-content active" id="caption">
+                <h2>AI-Powered Caption Generator</h2>
+                <p>Describe your post and we'll generate engaging captions for you</p>
+                
+                <textarea id="captionInput" placeholder="What's your post about? Example: 'Beach sunset with my friends last weekend'"></textarea>
+                <button class="btn" id="generateCaption">
+                    <i class="fas fa-magic"></i> Generate Captions
+                </button>
+                
+                <div class="result-box" id="captionResult" style="display: none;">
+                    <h3>Suggested Captions:</h3>
+                    <div id="generatedCaptions"></div>
+                    <button class="copy-btn" id="copyCaption">
+                        <i class="far fa-copy"></i> Copy to Clipboard
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Hashtag Finder Tab -->
+            <div class="tab-content" id="hashtag">
+                <h2>Hashtag Generator</h2>
+                <p>Get trending hashtags for your niche</p>
+                
+                <textarea id="hashtagInput" placeholder="What's your post about? Example: 'fitness workout'"></textarea>
+                <button class="btn" id="generateHashtags">
+                    <i class="fas fa-hashtag"></i> Find Hashtags
+                </button>
+                
+                <div class="result-box" id="hashtagResult" style="display: none;">
+                    <h3>Recommended Hashtags:</h3>
+                    <div class="hashtag-container" id="hashtagsContainer"></div>
+                    <button class="copy-btn" id="copyHashtags">
+                        <i class="far fa-copy"></i> Copy All Hashtags
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Post Analyzer Tab -->
+            <div class="tab-content" id="analyzer">
+                <h2>Post Performance Analyzer</h2>
+                <p>Paste your post URL to get insights</p>
+                
+                <input type="text" id="postUrl" placeholder="Paste Instagram post URL" class="input-group" style="width: 100%; padding: 1rem; margin-bottom: 1rem;">
+                <button class="btn" id="analyzePost">
+                    <i class="fas fa-chart-line"></i> Analyze Post
+                </button>
+                
+                <div class="result-box" id="analysisResult" style="display: none;">
+                    <h3>Analysis Results:</h3>
+                    <div id="analysisData"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="features">
+            <div class="feature-card">
+                <i class="fas fa-calendar-alt"></i>
+                <h3>Post Scheduler</h3>
+                <p>Coming soon - Schedule your Instagram posts for optimal times</p>
+                <button class="btn" disabled>Coming Soon</button>
+            </div>
+            
+            <div class="feature-card">
+                <i class="fas fa-users"></i>
+                <h3>Audience Insights</h3>
+                <p>Coming soon - Analyze your followers and growth</p>
+                <button class="btn" disabled>Coming Soon</button>
+            </div>
+            
+            <div class="feature-card">
+                <i class="fas fa-chart-pie"></i>
+                <h3>Content Strategy</h3>
+                <p>Coming soon - Get personalized content recommendations</p>
+                <button class="btn" disabled>Coming Soon</button>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2023 Namz Ajz. All rights reserved.</p>
+        <div style="margin-top: 1rem;">
+            <a href="#" style="color: white; margin: 0 10px;"><i class="fab fa-facebook"></i></a>
+            <a href="#" style="color: white; margin: 0 10px;"><i class="fab fa-twitter"></i></a>
+            <a href="#" style="color: white; margin: 0 10px;"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // Tab functionality
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                btn.classList.add('active');
+                const tabId = btn.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Caption Generator
+        const captionInput = document.getElementById('captionInput');
+        const generateCaptionBtn = document.getElementById('generateCaption');
+        const captionResult = document.getElementById('captionResult');
+        const generatedCaptions = document.getElementById('generatedCaptions');
+        const copyCaptionBtn = document.getElementById('copyCaption');
+        
+        generateCaptionBtn.addEventListener('click', () => {
+            if (!captionInput.value.trim()) {
+                alert('Please describe your post');
+                return;
+            }
+            
+            generateCaptionBtn.disabled = true;
+            generateCaptionBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+            
+            // Simulate API call with timeout
+            setTimeout(() => {
+                const captions = generateCaptions(captionInput.value);
+                displayCaptions(captions);
+                
+                generateCaptionBtn.disabled = false;
+                generateCaptionBtn.innerHTML = '<i class="fas fa-magic"></i> Generate Captions';
+            }, 1500);
+        });
+        
+        function generateCaptions(input) {
+            // These would come from an AI API in production
+            const captions = [
+                `✨ ${input} ✨ #vibes`,
+                `Living my best life with ${input} 💫 #blessed`,
+                `When ${input} hits different 😍 #mood`,
+                `Never underestimate the power of ${input} 🔥 #inspiration`,
+                `My happy place: ${input} 🌈 #goodvibesonly`,
+                `${input} with my favorite people ❤️ #memories`,
+                `The secret to happiness? More ${input}! 😊 #lifestyle`,
+                `Found my new obsession: ${input} 🚀 #discover`
+            ];
+            
+            return captions;
+        }
+        
+        function displayCaptions(captions) {
+            generatedCaptions.innerHTML = captions.map(c => `<p style="margin-bottom: 1rem;">${c}</p>`).join('');
+            captionResult.style.display = 'block';
+        }
+        
+        copyCaptionBtn.addEventListener('click', () => {
+            const textToCopy = Array.from(generatedCaptions.querySelectorAll('p'))
+                .map(p => p.textContent)
+                .join('\n\n');
+            
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const originalText = copyCaptionBtn.innerHTML;
+                copyCaptionBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                    copyCaptionBtn.innerHTML = originalText;
+                }, 2000);
+            });
+        });
+        
+        // Hashtag Generator
+        const hashtagInput = document.getElementById('hashtagInput');
+        const generateHashtagsBtn = document.getElementById('generateHashtags');
+        const hashtagResult = document.getElementById('hashtagResult');
+        const hashtagsContainer = document.getElementById('hashtagsContainer');
+        const copyHashtagsBtn = document.getElementById('copyHashtags');
+        
+        generateHashtagsBtn.addEventListener('click', () => {
+            if (!hashtagInput.value.trim()) {
+                alert('Please enter some keywords');
+                return;
+            }
+            
+            generateHashtagsBtn.disabled = true;
+            generateHashtagsBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Finding...';
+            
+            // Simulate API call with timeout
+            setTimeout(() => {
+                const hashtags = generateHashtags(hashtagInput.value);
+                displayHashtags(hashtags);
+                
+                generateHashtagsBtn.disabled = false;
+                generateHashtagsBtn.innerHTML = '<i class="fas fa-hashtag"></i> Find Hashtags';
+            }, 1500);
+        });
+        
+        function generateHashtags(input) {
+            // These would come from an API in production
+            const baseHashtags = input.toLowerCase().split(' ');
+            const variations = baseHashtags.flatMap(word => [
+                word,
+                `${word}life`,
+                `${word}love`,
+                `${word}time`,
+                `${word}addict`,
+                `best${word}`,
+                `${word}oftheday`
+            ]);
+            
+            const popularHashtags = [
+                'instagram', 'instadaily', 'photooftheday', 'picoftheday',
+                'instagood', 'trending', 'viral', 'explorepage'
+            ];
+            
+            return [...new Set([...variations, ...popularHashtags])].slice(0, 30);
+        }
+        
+        function displayHashtags(hashtags) {
+            hashtagsContainer.innerHTML = hashtags
+                .map(tag => `<span class="hashtag">#${tag}</span>`)
+                .join('');
+            hashtagResult.style.display = 'block';
+        }
+        
+        copyHashtagsBtn.addEventListener('click', () => {
+            const hashtags = Array.from(hashtagsContainer.querySelectorAll('.hashtag'))
+                .map(el => el.textContent)
+                .join(' ');
+            
+            navigator.clipboard.writeText(hashtags).then(() => {
+                const originalText = copyHashtagsBtn.innerHTML;
+                copyHashtagsBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                    copyHashtagsBtn.innerHTML = originalText;
+                }, 2000);
+            });
+        });
+        
+        // Post Analyzer (simulated)
+        const analyzePostBtn = document.getElementById('analyzePost');
+        const analysisResult = document.getElementById('analysisResult');
+        const analysisData = document.getElementById('analysisData');
+        
+        analyzePostBtn.addEventListener('click', () => {
+            const postUrl = document.getElementById('postUrl').value.trim();
+            
+            if (!postUrl.includes('instagram.com/p/')) {
+                alert('Please enter a valid Instagram post URL');
+                return;
+            }
+            
+            analyzePostBtn.disabled = true;
+            analyzePostBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
+            
+            // Simulate analysis
+            setTimeout(() => {
+                analysisData.innerHTML = `
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+                        <div>
+                            <h4>Engagement Rate</h4>
+                            <p style="font-size: 2rem; color: var(--primary);">4.8%</p>
+                            <p>Above average for your niche</p>
+                        </div>
+                        <div>
+                            <h4>Potential Reach</h4>
+                            <p style="font-size: 2rem; color: var(--primary);">12.4K</p>
+                            <p>Based on hashtag performance</p>
+                        </div>
+                        <div>
+                            <h4>Best Posting Time</h4>
+                            <p style="font-size: 2rem; color: var(--primary);">3:45 PM</p>
+                            <p>When your audience is most active</p>
+                        </div>
+                        <div>
+                            <h4>Recommended Hashtags</h4>
+                            <p>#viral #trending #explorepage</p>
+                        </div>
+                    </div>
+                `;
+                analysisResult.style.display = 'block';
+                
+                analyzePostBtn.disabled = false;
+                analyzePostBtn.innerHTML = '<i class="fas fa-chart-line"></i> Analyze Post';
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
