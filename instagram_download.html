@@ -1,0 +1,2213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Namz Ajz - Premium Instagram Downloader</title>
+    <meta name="description" content="Download Instagram content - stories, posts, reels, IGTV, and profile pictures in high quality">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --primary-dark: #554ddb;
+            --secondary: #FF6584;
+            --dark: #2A2A3C;
+            --dark-light: #3a3a4c;
+            --light: #F8F9FA;
+            --light-dark: #e9ecef;
+            --success: #28A745;
+            --warning: #FFC107;
+            --danger: #DC3545;
+            --text: #495057;
+            --text-light: #6c757d;
+            --border-radius: 12px;
+            --box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--dark);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* Layout */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0.5rem 0;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--primary);
+        }
+        
+        .logo i {
+            margin-right: 0.75rem;
+            font-size: 1.6rem;
+        }
+        
+        .logo span {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:not(.btn):hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a:not(.btn)::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:not(.btn):hover::after {
+            width: 100%;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.7rem 1.75rem;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+        
+        .btn i {
+            font-size: 0.9rem;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-sm {
+            padding: 0.5rem 1.25rem;
+            font-size: 0.85rem;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(108,99,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            z-index: -1;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.25rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--text-light);
+        }
+        
+        /* Tool Card */
+        .tool-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 2rem;
+        }
+        
+        .tool-card h2 {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .tool-card h2 i {
+            color: var(--primary);
+        }
+        
+        /* Tabs */
+        .tab-buttons {
+            display: flex;
+            border-bottom: 1px solid var(--light-dark);
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .tab-btn {
+            padding: 0.8rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-light);
+            position: relative;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+        
+        .tab-btn.active {
+            color: var(--primary);
+        }
+        
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary);
+            border-radius: 3px 3px 0 0;
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Form Elements */
+        .input-group {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            flex-direction: column;
+        }
+        
+        .input-field {
+            flex: 1;
+            position: relative;
+        }
+        
+        .input-group input, 
+        .input-group textarea {
+            width: 100%;
+            padding: 0.9rem 1.25rem;
+            border: 1px solid var(--light-dark);
+            border-radius: 50px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition);
+            background-color: white;
+        }
+        
+        .input-group textarea {
+            border-radius: var(--border-radius);
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .input-group input:focus, 
+        .input-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
+        }
+        
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            background-color: var(--light-dark);
+            border-radius: 50px;
+            margin-bottom: 0.75rem;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 50px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-text {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            text-align: center;
+        }
+        
+        /* Video Items */
+        .video-item {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background-color: var(--light);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--light-dark);
+        }
+        
+        .video-preview {
+            width: 100%;
+            border-radius: var(--border-radius);
+            margin: 1rem 0;
+            max-height: 500px;
+            object-fit: contain;
+            background-color: #000;
+        }
+        
+        /* Results */
+        .result-container {
+            margin-top: 2rem;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .result-container.active {
+            display: block;
+        }
+        
+        .video-result {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--light-dark);
+        }
+        
+        .video-result:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        /* Features Grid */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.25rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 0.75rem;
+        }
+        
+        /* Loading States */
+        .loading {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-light);
+        }
+        
+        .loading-spinner {
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 3px solid rgba(108, 99, 255, 0.2);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h4 {
+            color: white;
+            margin-bottom: 1.25rem;
+            font-size: 1.1rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--dark-light);
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--dark-light);
+            color: rgba(255,255,255,0.7);
+            font-size: 0.85rem;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tool-card {
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1.5rem;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+            }
+            
+            .nav-links a {
+                padding: 0.75rem 0;
+                width: 100%;
+            }
+            
+            .hero {
+                padding: 3rem 0 2rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .tab-buttons {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 5px;
+                scrollbar-width: none;
+            }
+            
+            .tab-buttons::-webkit-scrollbar {
+                display: none;
+            }
+            
+            .tab-btn {
+                padding: 0.7rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .feature-card {
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                width: 100%;
+                padding: 0.9rem;
+            }
+            
+            .input-group {
+                gap: 0.75rem;
+            }
+            
+            .tool-card {
+                padding: 1.25rem;
+            }
+        }
+        :root {
+            --primary: #E1306C;
+            --primary-dark: #C13584;
+            --secondary: #F77737;
+            --dark: #262626;
+            --dark-light: #363636;
+            --light: #F8F9FA;
+            --light-dark: #e9ecef;
+            --success: #28A745;
+            --warning: #FFC107;
+            --danger: #DC3545;
+            --text: #495057;
+            --text-light: #6c757d;
+            --border-radius: 12px;
+            --box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--dark);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* Layout */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0.5rem 0;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--primary);
+        }
+        
+        .logo i {
+            margin-right: 0.75rem;
+            font-size: 1.6rem;
+        }
+        
+        .logo span {
+            background: linear-gradient(to right, var(--primary), var(--secondary);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:not(.btn):hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a:not(.btn)::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:not(.btn):hover::after {
+            width: 100%;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.7rem 1.75rem;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+        
+        .btn i {
+            font-size: 0.9rem;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(225, 48, 108, 0.3);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-sm {
+            padding: 0.5rem 1.25rem;
+            font-size: 0.85rem;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(225,48,108,0.1) 0%, rgba(255,255,255,0) 70%);
+            z-index: -1;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.25rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--text-light);
+        }
+        
+        /* Tool Card */
+        .tool-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 2rem;
+        }
+        
+        .tool-card h2 {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .tool-card h2 i {
+            color: var(--primary);
+        }
+        
+        /* Tabs */
+        .tab-buttons {
+            display: flex;
+            border-bottom: 1px solid var(--light-dark);
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .tab-btn {
+            padding: 0.8rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-light);
+            position: relative;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+        
+        .tab-btn.active {
+            color: var(--primary);
+        }
+        
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary);
+            border-radius: 3px 3px 0 0;
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Form Elements */
+        .input-group {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            flex-direction: column;
+        }
+        
+        .input-field {
+            flex: 1;
+            position: relative;
+        }
+        
+        .input-group input, 
+        .input-group textarea {
+            width: 100%;
+            padding: 0.9rem 1.25rem;
+            border: 1px solid var(--light-dark);
+            border-radius: 50px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition);
+            background-color: white;
+        }
+        
+        .input-group textarea {
+            border-radius: var(--border-radius);
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .input-group input:focus, 
+        .input-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(225, 48, 108, 0.1);
+        }
+        
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            background-color: var(--light-dark);
+            border-radius: 50px;
+            margin-bottom: 0.75rem;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 50px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-text {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            text-align: center;
+        }
+        
+        /* Media Items */
+        .media-item {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background-color: var(--light);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--light-dark);
+        }
+        
+        .media-preview {
+            width: 100%;
+            border-radius: var(--border-radius);
+            margin: 1rem 0;
+            max-height: 500px;
+            object-fit: contain;
+            background-color: #000;
+        }
+        
+        /* Results */
+        .result-container {
+            margin-top: 2rem;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .result-container.active {
+            display: block;
+        }
+        
+        .media-result {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--light-dark);
+        }
+        
+        .media-result:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        /* Features Grid */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.25rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 0.75rem;
+        }
+        
+        /* Loading States */
+        .loading {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-light);
+        }
+        
+        .loading-spinner {
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 3px solid rgba(225, 48, 108, 0.2);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Profile Card */
+        .profile-card {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-bottom: 1.5rem;
+        }
+        
+        .profile-pic {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1.5rem;
+            border: 3px solid var(--light-dark);
+        }
+        
+        .profile-info {
+            flex: 1;
+        }
+        
+        .profile-stats {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+        
+        /* Media Grid */
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .grid-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            background-color: var(--light-dark);
+        }
+        
+        .grid-item img, .grid-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .media-type {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h4 {
+            color: white;
+            margin-bottom: 1.25rem;
+            font-size: 1.1rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--dark-light);
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--dark-light);
+            color: rgba(255,255,255,0.7);
+            font-size: 0.85rem;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tool-card {
+                padding: 1.5rem;
+            }
+            
+            .profile-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .profile-pic {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            .profile-stats {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1.5rem;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+            }
+            
+            .nav-links a {
+                padding: 0.75rem 0;
+                width: 100%;
+            }
+            
+            .hero {
+                padding: 3rem 0 2rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .tab-buttons {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 5px;
+                scrollbar-width: none;
+            }
+            
+            .tab-buttons::-webkit-scrollbar {
+                display: none;
+            }
+            
+            .tab-btn {
+                padding: 0.7rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .feature-card {
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                width: 100%;
+                padding: 0.9rem;
+            }
+            
+            .input-group {
+                gap: 0.75rem;
+            }
+            
+            .tool-card {
+                padding: 1.25rem;
+            }
+            
+            .media-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-cloud-download-alt"></i>
+                    <span>Namz Ajz</span>
+                </a>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="nav-links" id="navLinks">
+                    <a href="index.html">Home</a>
+                    <a href="comparison.html">Comparison</a>
+                    <a href="instagram.html" class="active">Instagram</a>
+                    <a href="telegram.html">Telegram</a>
+                    <a href="affiliate.html">Affiliate</a>
+                    <a href="login.html" class="btn btn-sm">Login</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Premium Instagram Downloader</h1>
+                <p>Download Instagram stories, posts, reels, IGTV, and profile pictures in high quality with our free tool.</p>
+            </div>
+        </section>
+        
+        <section class="container">
+            <div class="tool-card">
+                <h2><i class="fab fa-instagram"></i> Instagram Downloader</h2>
+                
+                <!-- Tab Navigation -->
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="post">Posts</button>
+                    <button class="tab-btn" data-tab="story">Stories</button>
+                    <button class="tab-btn" data-tab="reel">Reels</button>
+                    <button class="tab-btn" data-tab="igtv">IGTV</button>
+                    <button class="tab-btn" data-tab="profile">Profile</button>
+                </div>
+                
+                <!-- Post Download Tab -->
+                <div class="tab-content active" id="post">
+                    <p>Download any Instagram post (photos or videos) in high quality</p>
+                    <div class="input-group">
+                        <input type="text" id="postUrl" placeholder="Paste Instagram post URL here (e.g., https://www.instagram.com/p/CxYz123AbC/)">
+                        <button class="btn" id="downloadPostBtn">
+                            <i class="fas fa-download"></i> Download Post
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Story Download Tab -->
+                <div class="tab-content" id="story">
+                    <p>Download Instagram stories from any public profile</p>
+                    <div class="input-group">
+                        <input type="text" id="storyUsername" placeholder="Enter Instagram username (without @)">
+                        <button class="btn" id="fetchStoriesBtn">
+                            <i class="fas fa-user-circle"></i> Fetch Stories
+                        </button>
+                    </div>
+                    <div id="storyResults" style="display: none;">
+                        <h4>Available Stories</h4>
+                        <div id="storyList" class="media-grid" style="margin: 1rem 0;"></div>
+                        <div class="input-group">
+                            <button class="btn" id="downloadStoriesBtn">
+                                <i class="fas fa-download"></i> Download Selected
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Reels Download Tab -->
+                <div class="tab-content" id="reel">
+                    <p>Download Instagram Reels videos in HD quality without watermark</p>
+                    <div class="input-group">
+                        <input type="text" id="reelUrl" placeholder="Paste Instagram Reel URL here (e.g., https://www.instagram.com/reel/CxYz123AbC/)">
+                        <button class="btn" id="downloadReelBtn">
+                            <i class="fas fa-download"></i> Download Reel
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- IGTV Download Tab -->
+                <div class="tab-content" id="igtv">
+                    <p>Download IGTV videos in high quality</p>
+                    <div class="input-group">
+                        <input type="text" id="igtvUrl" placeholder="Paste IGTV URL here (e.g., https://www.instagram.com/tv/CxYz123AbC/)">
+                        <button class="btn" id="downloadIgtvBtn">
+                            <i class="fas fa-download"></i> Download IGTV
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Profile Download Tab -->
+                <div class="tab-content" id="profile">
+                    <p>Download profile picture and all posts from an Instagram account</p>
+                    <div class="input-group">
+                        <input type="text" id="profileUsername" placeholder="Enter Instagram username (without @)">
+                        <button class="btn" id="fetchProfileBtn">
+                            <i class="fas fa-user-circle"></i> Fetch Profile
+                        </button>
+                    </div>
+                    <div id="profileResults" style="display: none;">
+                        <div class="profile-card" id="profileInfo">
+                            <!-- Profile info will be inserted here -->
+                        </div>
+                        
+                        <h4>Profile Picture</h4>
+                        <div id="profilePicContainer" style="margin: 1rem 0;">
+                            <!-- Profile picture will be inserted here -->
+                        </div>
+                        
+                        <h4>Recent Posts</h4>
+                        <div id="profilePosts" class="media-grid" style="margin: 1rem 0;"></div>
+                        
+                        <div class="input-group">
+                            <button class="btn" id="downloadAllPostsBtn">
+                                <i class="fas fa-download"></i> Download All Posts
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Loading Indicator -->
+                <div id="loading" style="display: none; text-align: center; padding: 1.5rem;">
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                        <span>Processing your request...</span>
+                    </div>
+                </div>
+                
+                <!-- Results Container -->
+                <div class="result-container" id="resultContainer">
+                    <h3><i class="fas fa-check-circle" style="color: var(--success);"></i> Download Results</h3>
+                    <div id="downloadResults" style="margin-top: 1.5rem;">
+                        <!-- Results will be inserted here -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <h3>High Speed Downloads</h3>
+                    <p>Our optimized servers deliver Instagram content at blazing fast speeds without quality loss.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-images"></i>
+                    <h3>Multiple Formats</h3>
+                    <p>Download photos, videos, stories, reels, and IGTV in their original quality.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-user-secret"></i>
+                    <h3>Private & Secure</h3>
+                    <p>We don't store your data or require Instagram login. Your privacy is protected.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>Namz Ajz</h4>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 1.6;">
+                        The most advanced Instagram downloader tool. Save stories, posts, reels and more in HD quality.
+                    </p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="comparison.html">Comparison</a></li>
+                        <li><a href="instagram.html" class="active">Instagram Downloader</a></li>
+                        <li><a href="telegram.html">Telegram Tool</a></li>
+                        <li><a href="affiliate.html">Affiliate Program</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Newsletter</h4>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 1rem;">
+                        Subscribe to get updates on new features and tools.
+                    </p>
+                    <div class="input-group" style="flex-direction: row; gap: 0.5rem;">
+                        <input type="email" placeholder="Your email" style="padding: 0.6rem 1rem; font-size: 0.9rem;">
+                        <button class="btn btn-sm" style="padding: 0.6rem 1rem;">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Namz Ajz. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                const icon = this.querySelector('i');
+                if (navLinks.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+            
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                        mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+                    }
+                });
+            });
+            
+            // Tab functionality
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    btn.classList.add('active');
+                    const tabId = btn.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                    
+                    // Clear previous results when switching tabs
+                    hideResultContainer();
+                });
+            });
+
+            // Post download
+            const downloadPostBtn = document.getElementById('downloadPostBtn');
+            downloadPostBtn.addEventListener('click', downloadPost);
+
+            // Story download
+            const fetchStoriesBtn = document.getElementById('fetchStoriesBtn');
+            fetchStoriesBtn.addEventListener('click', fetchStories);
+            const downloadStoriesBtn = document.getElementById('downloadStoriesBtn');
+            downloadStoriesBtn.addEventListener('click', downloadSelectedStories);
+
+            // Reel download
+            const downloadReelBtn = document.getElementById('downloadReelBtn');
+            downloadReelBtn.addEventListener('click', downloadReel);
+
+            // IGTV download
+            const downloadIgtvBtn = document.getElementById('downloadIgtvBtn');
+            downloadIgtvBtn.addEventListener('click', downloadIgtv);
+
+            // Profile download
+            const fetchProfileBtn = document.getElementById('fetchProfileBtn');
+            fetchProfileBtn.addEventListener('click', fetchProfile);
+            const downloadAllPostsBtn = document.getElementById('downloadAllPostsBtn');
+            downloadAllPostsBtn.addEventListener('click', downloadAllProfilePosts);
+
+            async function downloadPost() {
+                const url = document.getElementById('postUrl').value.trim();
+                
+                if (!isValidInstagramPostUrl(url)) {
+                    showAlert('Please enter a valid Instagram post URL (e.g., https://www.instagram.com/p/CxYz123AbC/)');
+                    return;
+                }
+                
+                showLoading();
+                hideResultContainer();
+                
+                try {
+                    const postData = await fetchInstagramPost(url);
+                    displayDownloadResult([postData]);
+                } catch (error) {
+                    showAlert('Error: ' + error.message);
+                } finally {
+                    hideLoading();
+                }
+            }
+
+            async function fetchStories() {
+                const username = document.getElementById('storyUsername').value.trim();
+                if (!username) {
+                    showAlert('Please enter an Instagram username');
+                    return;
+                }
+                
+                showLoading();
+                hideResultContainer();
+                
+                try {
+                    const stories = await fetchInstagramStories(username);
+                    
+                    const storyList = document.getElementById('storyList');
+                    storyList.innerHTML = '';
+                    
+                    if (stories.length === 0) {
+                        storyList.innerHTML = '<p style="color: var(--text-light); text-align: center; grid-column: 1/-1;">No stories found for this profile</p>';
+                        return;
+                    }
+                    
+                    // Add select all checkbox
+                    const selectAllItem = document.createElement('div');
+                    selectAllItem.className = 'grid-item';
+                    selectAllItem.style.display = 'flex';
+                    selectAllItem.style.alignItems = 'center';
+                    selectAllItem.style.justifyContent = 'center';
+                    selectAllItem.style.gridColumn = '1/-1';
+                    selectAllItem.innerHTML = `
+                        <div style="display: flex; align-items: center;">
+                            <input type="checkbox" id="selectAllStories" checked style="margin-right: 0.5rem;">
+                            <label for="selectAllStories" style="font-weight: 500;">Select All Stories</label>
+                        </div>
+                    `;
+                    storyList.appendChild(selectAllItem);
+                    
+                    // Add toggle functionality for select all
+                    const selectAllCheckbox = document.getElementById('selectAllStories');
+                    selectAllCheckbox.addEventListener('change', function() {
+                        document.querySelectorAll('.story-checkbox').forEach(checkbox => {
+                            checkbox.checked = this.checked;
+                        });
+                    });
+                    
+                    // Add stories
+                    stories.forEach(story => {
+                        const storyItem = document.createElement('div');
+                        storyItem.className = 'grid-item';
+                        
+                        if (story.isVideo) {
+                            storyItem.innerHTML = `
+                                <video src="${story.previewUrl}" muted loop></video>
+                                <span class="media-type">Video</span>
+                                <input type="checkbox" class="story-checkbox" checked 
+                                       data-url="${story.url}" 
+                                       data-id="${story.id}"
+                                       style="position: absolute; bottom: 0.5rem; left: 0.5rem;">
+                            `;
+                        } else {
+                            storyItem.innerHTML = `
+                                <img src="${story.previewUrl}">
+                                <span class="media-type">Photo</span>
+                                <input type="checkbox" class="story-checkbox" checked 
+                                       data-url="${story.url}" 
+                                       data-id="${story.id}"
+                                       style="position: absolute; bottom: 0.5rem; left: 0.5rem;">
+                            `;
+                        }
+                        
+                        storyList.appendChild(storyItem);
+                    });
+                    
+                    document.getElementById('storyResults').style.display = 'block';
+                } catch (error) {
+                    showAlert('Error fetching stories: ' + error.message);
+                } finally {
+                    hideLoading();
+                }
+            }
+
+            async function downloadSelectedStories() {
+                const checkboxes = document.querySelectorAll('.story-checkbox:checked');
+                if (checkboxes.length === 0) {
+                    showAlert('Please select at least one story to download');
+                    return;
+                }
+                
+                const storiesToDownload = Array.from(checkboxes).map(checkbox => ({
+                    url: checkbox.dataset.url,
+                    id: checkbox.dataset.id
+                }));
+                
+                showMultipleProgress(storiesToDownload.length);
+                hideResultContainer();
+                
+                try {
+                    const results = [];
+                    for (let i = 0; i < storiesToDownload.length; i++) {
+                        updateMultipleProgress(i + 1, storiesToDownload.length, 
+                            `Processing story ${i + 1} of ${storiesToDownload.length}`);
+                        
+                        try {
+                            const storyData = await fetchInstagramStory(storiesToDownload[i].url);
+                            results.push(storyData);
+                        } catch (error) {
+                            console.error(`Failed to download story ${storiesToDownload[i].id}:`, error);
+                        }
+                        
+                        // Add slight delay between requests to avoid rate limiting
+                        if (i < storiesToDownload.length - 1) {
+                            await new Promise(resolve => setTimeout(resolve, 500));
+                        }
+                    }
+                    
+                    if (results.length > 0) {
+                        displayDownloadResult(results);
+                    } else {
+                        showAlert('No stories were downloaded successfully. Please try again.');
+                    }
+                } catch (error) {
+                    showAlert('Error during story download: ' + error.message);
+                } finally {
+                    hideMultipleProgress();
+                }
+            }
+
+            async function downloadReel() {
+                const url = document.getElementById('reelUrl').value.trim();
+                
+                if (!isValidInstagramReelUrl(url)) {
+                    showAlert('Please enter a valid Instagram Reel URL (e.g., https://www.instagram.com/reel/CxYz123AbC/)');
+                    return;
+                }
+                
+                showLoading();
+                hideResultContainer();
+                
+                try {
+                    const reelData = await fetchInstagramReel(url);
+                    displayDownloadResult([reelData]);
+                } catch (error) {
+                    showAlert('Error: ' + error.message);
+                } finally {
+                    hideLoading();
+                }
+            }
+
+            async function downloadIgtv() {
+                const url = document.getElementById('igtvUrl').value.trim();
+                
+                if (!isValidInstagramIgtvUrl(url)) {
+                    showAlert('Please enter a valid IGTV URL (e.g., https://www.instagram.com/tv/CxYz123AbC/)');
+                    return;
+                }
+                
+                showLoading();
+                hideResultContainer();
+                
+                try {
+                    const igtvData = await fetchInstagramIgtv(url);
+                    displayDownloadResult([igtvData]);
+                } catch (error) {
+                    showAlert('Error: ' + error.message);
+                } finally {
+                    hideLoading();
+                }
+            }
+
+            async function fetchProfile() {
+                const username = document.getElementById('profileUsername').value.trim();
+                if (!username) {
+                    showAlert('Please enter an Instagram username');
+                    return;
+                }
+                
+                showLoading();
+                hideResultContainer();
+                
+                try {
+                    const profileData = await fetchInstagramProfile(username);
+                    
+                    // Display profile info
+                    const profileInfo = document.getElementById('profileInfo');
+                    profileInfo.innerHTML = `
+                        <img src="${profileData.profilePic}" class="profile-pic">
+                        <div class="profile-info">
+                            <h3>${profileData.username}</h3>
+                            <p>${profileData.fullName || ''}</p>
+                            <p style="margin: 0.5rem 0;">${profileData.bio || ''}</p>
+                            <div class="profile-stats">
+                                <div class="stat-item">
+                                    <div class="stat-number">${profileData.postsCount}</div>
+                                    <div class="stat-label">Posts</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number">${profileData.followers}</div>
+                                    <div class="stat-label">Followers</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number">${profileData.following}</div>
+                                    <div class="stat-label">Following</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Display profile picture
+                    const profilePicContainer = document.getElementById('profilePicContainer');
+                    profilePicContainer.innerHTML = `
+                        <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;">
+                            <img src="${profileData.profilePic}" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid var(--light-dark);">
+                            <div>
+                                <a href="${profileData.profilePic}" class="btn" download="${username}_profile_pic.jpg">
+                                    <i class="fas fa-download"></i> Download Profile Picture
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Display posts
+                    const profilePosts = document.getElementById('profilePosts');
+                    profilePosts.innerHTML = '';
+                    
+                    if (profileData.posts.length === 0) {
+                        profilePosts.innerHTML = '<p style="color: var(--text-light); text-align: center; grid-column: 1/-1;">No posts found for this profile</p>';
+                        return;
+                    }
+                    
+                    profileData.posts.forEach(post => {
+                        const postItem = document.createElement('div');
+                        postItem.className = 'grid-item';
+                        
+                        if (post.isVideo) {
+                            postItem.innerHTML = `
+                                <video src="${post.previewUrl}" muted loop></video>
+                                <span class="media-type">Video</span>
+                            `;
+                        } else if (post.isCarousel) {
+                            postItem.innerHTML = `
+                                <img src="${post.previewUrl}">
+                                <span class="media-type">Carousel (${post.mediaCount})</span>
+                            `;
+                        } else {
+                            postItem.innerHTML = `
+                                <img src="${post.previewUrl}">
+                                <span class="media-type">Photo</span>
+                            `;
+                        }
+                        
+                        postItem.addEventListener('click', () => {
+                            downloadPostFromGrid(post.url);
+                        });
+                        
+                        profilePosts.appendChild(postItem);
+                    });
+                    
+                    document.getElementById('profileResults').style.display = 'block';
+                } catch (error) {
+                    showAlert('Error fetching profile: ' + error.message);
+                } finally {
+                    hideLoading();
+                }
+            }
+
+            async function downloadAllProfilePosts() {
+                const profilePosts = document.querySelectorAll('#profilePosts .grid-item');
+                if (profilePosts.length === 0) {
+                    showAlert('No posts available to download');
+                    return;
+                }
+                
+                // In a real implementation, you would collect all post URLs and process them
+                showAlert('This would download all posts in the profile. In a real implementation, you would process each post.');
+            }
+
+            async function downloadPostFromGrid(postUrl) {
+                showLoading();
+                hideResultContainer();
+                
+                try {
+                    const postData = await fetchInstagramPost(postUrl);
+                    displayDownloadResult([postData]);
+                } catch (error) {
+                    showAlert('Error downloading post: ' + error.message);
+                } finally {
+                    hideLoading();
+                }
+            }
+
+            // Helper functions
+            function isValidInstagramPostUrl(url) {
+                return url.includes('instagram.com/p/') || url.includes('instagram.com/reel/') || url.includes('instagram.com/tv/');
+            }
+
+            function isValidInstagramReelUrl(url) {
+                return url.includes('instagram.com/reel/');
+            }
+
+            function isValidInstagramIgtvUrl(url) {
+                return url.includes('instagram.com/tv/');
+            }
+
+            async function fetchInstagramPost(url) {
+                // In production, you would use your own backend API
+                // This is a mock implementation
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                // Mock data - in reality you would fetch this from a backend service
+                const isVideo = Math.random() > 0.5;
+                const isCarousel = !isVideo && Math.random() > 0.7;
+                
+                return {
+                    url: url,
+                    previewUrl: isVideo ? 
+                        'https://example.com/sample-video.mp4' : 
+                        `https://picsum.photos/800/800?random=${Math.floor(Math.random() * 1000)}`,
+                    downloadUrl: isVideo ? 
+                        'https://example.com/sample-video.mp4' : 
+                        `https://picsum.photos/1200/1200?random=${Math.floor(Math.random() * 1000)}`,
+                    title: 'Instagram ' + (isVideo ? 'Video' : (isCarousel ? 'Carousel' : 'Photo')),
+                    author: 'instagram_user',
+                    isVideo: isVideo,
+                    isCarousel: isCarousel,
+                    mediaCount: isCarousel ? Math.floor(Math.random() * 5) + 2 : 1
+                };
+            }
+
+            async function fetchInstagramStories(username) {
+                // Mock implementation - in production you would need a backend service
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                const storyCount = Math.floor(Math.random() * 10) + 1;
+                const mockStories = [];
+                
+                for (let i = 1; i <= storyCount; i++) {
+                    const isVideo = Math.random() > 0.6;
+                    mockStories.push({
+                        id: `${Math.floor(Math.random() * 100000000)}`,
+                        url: `https://instagram.com/stories/${username}/${Math.floor(Math.random() * 100000000)}`,
+                        previewUrl: isVideo ? 
+                            'https://example.com/sample-story-video.mp4' : 
+                            `https://picsum.photos/600/1067?random=${Math.floor(Math.random() * 1000)}`,
+                        isVideo: isVideo,
+                        timestamp: new Date(Date.now() - Math.floor(Math.random() * 24 * 60 * 60 * 1000)).toISOString()
+                    });
+                }
+                
+                return mockStories;
+            }
+
+            async function fetchInstagramStory(url) {
+                // Mock implementation
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                const isVideo = url.includes('video');
+                return {
+                    url: url,
+                    previewUrl: isVideo ? 
+                        'https://example.com/sample-story-video.mp4' : 
+                        `https://picsum.photos/600/1067?random=${Math.floor(Math.random() * 1000)}`,
+                    downloadUrl: isVideo ? 
+                        'https://example.com/sample-story-video.mp4' : 
+                        `https://picsum.photos/1080/1920?random=${Math.floor(Math.random() * 1000)}`,
+                    title: 'Instagram Story ' + (isVideo ? 'Video' : 'Photo'),
+                    author: url.split('/')[3],
+                    isVideo: isVideo
+                };
+            }
+
+            async function fetchInstagramReel(url) {
+                // Mock implementation
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                return {
+                    url: url,
+                    previewUrl: 'https://example.com/sample-reel.mp4',
+                    downloadUrl: 'https://example.com/sample-reel.mp4',
+                    title: 'Instagram Reel Video',
+                    author: 'instagram_user',
+                    isVideo: true,
+                    duration: Math.floor(Math.random() * 30) + 10
+                };
+            }
+
+            async function fetchInstagramIgtv(url) {
+                // Mock implementation
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                return {
+                    url: url,
+                    previewUrl: 'https://example.com/sample-igtv.mp4',
+                    downloadUrl: 'https://example.com/sample-igtv.mp4',
+                    title: 'Instagram IGTV Video',
+                    author: 'instagram_user',
+                    isVideo: true,
+                    duration: Math.floor(Math.random() * 10 * 60) + 60
+                };
+            }
+
+            async function fetchInstagramProfile(username) {
+                // Mock implementation
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                const postCount = Math.floor(Math.random() * 100) + 10;
+                const mockPosts = [];
+                
+                for (let i = 1; i <= Math.min(12, postCount); i++) {
+                    const isVideo = Math.random() > 0.6;
+                    const isCarousel = !isVideo && Math.random() > 0.5;
+                    
+                    mockPosts.push({
+                        url: `https://instagram.com/p/${Math.random().toString(36).substring(7)}/`,
+                        previewUrl: isVideo ? 
+                            'https://example.com/sample-video.mp4' : 
+                            `https://picsum.photos/800/800?random=${Math.floor(Math.random() * 1000)}`,
+                        isVideo: isVideo,
+                        isCarousel: isCarousel,
+                        mediaCount: isCarousel ? Math.floor(Math.random() * 5) + 2 : 1,
+                        likes: Math.floor(Math.random() * 10000).toLocaleString(),
+                        comments: Math.floor(Math.random() * 1000).toLocaleString(),
+                        timestamp: new Date(Date.now() - Math.floor(Math.random() * 30 * 24 * 60 * 60 * 1000)).toISOString()
+                    });
+                }
+                
+                return {
+                    username: username,
+                    fullName: username.charAt(0).toUpperCase() + username.slice(1) + ' ' + ['User', 'Creator', 'Influencer', 'Artist'][Math.floor(Math.random() * 4)],
+                    profilePic: `https://picsum.photos/200/200?random=${Math.floor(Math.random() * 1000)}`,
+                    bio: ['Digital creator', 'Photographer', 'Travel enthusiast', 'Food lover'][Math.floor(Math.random() * 4)] + 
+                         ' | ' + ['Exploring the world', 'Sharing my passion', 'Creating content'][Math.floor(Math.random() * 3)],
+                    postsCount: postCount,
+                    followers: Math.floor(Math.random() * 1000000).toLocaleString(),
+                    following: Math.floor(Math.random() * 1000).toLocaleString(),
+                    posts: mockPosts
+                };
+            }
+
+            function displayDownloadResult(mediaItems) {
+                const resultsContainer = document.getElementById('downloadResults');
+                resultsContainer.innerHTML = '';
+                
+                mediaItems.forEach(media => {
+                    const mediaElement = document.createElement('div');
+                    mediaElement.className = 'media-result';
+                    
+                    if (media.isVideo) {
+                        mediaElement.innerHTML = `
+                            <div style="margin-bottom: 1.5rem;">
+                                <div style="display: flex; align-items: center; margin-bottom: 0.75rem;">
+                                    <div style="width: 40px; height: 40px; border-radius: 50%; background-color: var(--light-dark); margin-right: 0.75rem;"></div>
+                                    <div>
+                                        <h4 style="font-size: 1rem; margin-bottom: 0.25rem;">${media.author}</h4>
+                                        <p style="font-size: 0.85rem; color: var(--text-light);">Original ${media.title.includes('Story') ? 'Story' : 'Video'}</p>
+                                    </div>
+                                </div>
+                                <p style="margin-bottom: 1rem;">${media.title}</p>
+                                <video controls src="${media.previewUrl}" class="media-preview"></video>
+                            </div>
+                            <div style="display: flex; gap: 0.75rem;">
+                                <a href="${media.downloadUrl}" class="btn" download="${media.title.toLowerCase().replace(/ /g, '_')}_${Date.now()}.${media.isVideo ? 'mp4' : 'jpg'}" style="flex: 1;">
+                                    <i class="fas fa-download"></i> Download ${media.isVideo ? 'Video' : 'Photo'}
+                                </a>
+                                <button class="btn btn-outline" style="flex: 1;">
+                                    <i class="fas fa-share-alt"></i> Share
+                                </button>
+                            </div>
+                        `;
+                    } else if (media.isCarousel) {
+                        mediaElement.innerHTML = `
+                            <div style="margin-bottom: 1.5rem;">
+                                <div style="display: flex; align-items: center; margin-bottom: 0.75rem;">
+                                    <div style="width: 40px; height: 40px; border-radius: 50%; background-color: var(--light-dark); margin-right: 0.75rem;"></div>
+                                    <div>
+                                        <h4 style="font-size: 1rem; margin-bottom: 0.25rem;">${media.author}</h4>
+                                        <p style="font-size: 0.85rem; color: var(--text-light);">Carousel Post</p>
+                                    </div>
+                                </div>
+                                <p style="margin-bottom: 1rem;">${media.title} (${media.mediaCount} items)</p>
+                                <img src="${media.previewUrl}" class="media-preview">
+                            </div>
+                            <div style="display: flex; gap: 0.75rem;">
+                                <a href="${media.downloadUrl}" class="btn" download="${media.title.toLowerCase().replace(/ /g, '_')}_${Date.now()}.jpg" style="flex: 1;">
+                                    <i class="fas fa-download"></i> Download First Photo
+                                </a>
+                                <button class="btn btn-outline" style="flex: 1;">
+                                    <i class="fas fa-images"></i> Download All (${media.mediaCount})
+                                </button>
+                            </div>
+                        `;
+                    } else {
+                        mediaElement.innerHTML = `
+                            <div style="margin-bottom: 1.5rem;">
+                                <div style="display: flex; align-items: center; margin-bottom: 0.75rem;">
+                                    <div style="width: 40px; height: 40px; border-radius: 50%; background-color: var(--light-dark); margin-right: 0.75rem;"></div>
+                                    <div>
+                                        <h4 style="font-size: 1rem; margin-bottom: 0.25rem;">${media.author}</h4>
+                                        <p style="font-size: 0.85rem; color: var(--text-light);">Original Photo</p>
+                                    </div>
+                                </div>
+                                <p style="margin-bottom: 1rem;">${media.title}</p>
+                                <img src="${media.previewUrl}" class="media-preview">
+                            </div>
+                            <div style="display: flex; gap: 0.75rem;">
+                                <a href="${media.downloadUrl}" class="btn" download="${media.title.toLowerCase().replace(/ /g, '_')}_${Date.now()}.jpg" style="flex: 1;">
+                                    <i class="fas fa-download"></i> Download HD
+                                </a>
+                                <button class="btn btn-outline" style="flex: 1;">
+                                    <i class="fas fa-share-alt"></i> Share
+                                </button>
+                            </div>
+                        `;
+                    }
+                    
+                    resultsContainer.appendChild(mediaElement);
+                });
+                
+                document.getElementById('resultContainer').classList.add('active');
+                
+                // Scroll to results
+                document.getElementById('resultContainer').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+
+            function showLoading() {
+                document.getElementById('loading').style.display = 'block';
+            }
+
+            function hideLoading() {
+                document.getElementById('loading').style.display = 'none';
+            }
+
+            function showMultipleProgress(total) {
+                // In a real implementation, you would show progress for batch downloads
+                showLoading();
+                document.getElementById('loading').querySelector('span').textContent = 
+                    `Processing 1 of ${total}...`;
+            }
+
+            function updateMultipleProgress(current, total, message) {
+                document.getElementById('loading').querySelector('span').textContent = message;
+            }
+
+            function hideMultipleProgress() {
+                hideLoading();
+            }
+
+            function hideResultContainer() {
+                document.getElementById('resultContainer').classList.remove('active');
+                document.getElementById('downloadResults').innerHTML = '';
+            }
+
+            function showAlert(message) {
+                // In a real app, you might use a more sophisticated alert/notification system
+                alert(message);
+            }
+        });
+    </script>
+</body>
+</html>
