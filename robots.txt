@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://affiliatetools.netlify.app/sitemap.xml
