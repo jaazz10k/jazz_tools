@@ -1,14 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://affiliatetools.netlify.app/</loc>
-    <lastmod>2024-01-01</lastmod>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://affiliatetools.netlify.app/tiktok</loc>
-    <lastmod>2024-01-01</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <!-- Add all other pages -->
+    <!-- Homepage -->
+    <url>
+        <loc>https://affiliatetools.netlify.app/</loc>
+        <lastmod>2024-06-30</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <!-- Tool Pages -->
+    <url>
+        <loc>https://affiliatetools.netlify.app/tiktok</loc>
+        <lastmod>2024-06-30</lastmod>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://affiliatetools.netlify.app/whatsapp</loc>
+        <lastmod>2024-06-30</lastmod>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://affiliatetools.netlify.app/telegram</loc>
+        <lastmod>2024-06-30</lastmod>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://affiliatetools.netlify.app/youtube</loc>
+        <lastmod>2024-06-30</lastmod>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- Support Pages -->
+    <url>
+        <loc>https://affiliatetools.netlify.app/faq</loc>
+        <lastmod>2024-06-30</lastmod>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://affiliatetools.netlify.app/contact</loc>
+        <lastmod>2024-06-30</lastmod>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://affiliatetools.netlify.app/support</loc>
+        <lastmod>2024-06-30</lastmod>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- Legal Pages -->
+    <url>
+        <loc>https://affiliatetools.netlify.app/privacy</loc>
+        <lastmod>2024-01-01</lastmod>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://affiliatetools.netlify.app/terms</loc>
+        <lastmod>2024-01-01</lastmod>
+        <priority>0.5</priority>
+    </url>
 </urlset>
