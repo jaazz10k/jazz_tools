@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Namz Ajz - Premium TikTok Downloader</title>
-    <meta name="description" content="Download TikTok videos without watermark - single, multiple, or bulk profile downloads">
+    <title>Namz Ajz - All Tools Dashboard</title>
+    <meta name="description" content="Access all Namz Ajz tools in one place - TikTok, WhatsApp, Telegram, and YouTube utilities">
     
     <!-- Favicon -->
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
@@ -32,6 +32,12 @@
             --border-radius: 12px;
             --box-shadow: 0 8px 30px rgba(0,0,0,0.08);
             --transition: all 0.3s ease;
+            
+            /* Platform colors */
+            --tiktok: #000000;
+            --whatsapp: #25D366;
+            --telegram: #0088CC;
+            --youtube: #FF0000;
         }
         
         * {
@@ -73,7 +79,7 @@
         /* Layout */
         .container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 1.5rem;
         }
@@ -191,6 +197,23 @@
             font-size: 0.85rem;
         }
         
+        /* Platform-specific buttons */
+        .btn-tiktok {
+            background-color: var(--tiktok);
+        }
+        
+        .btn-whatsapp {
+            background-color: var(--whatsapp);
+        }
+        
+        .btn-telegram {
+            background-color: var(--telegram);
+        }
+        
+        .btn-youtube {
+            background-color: var(--youtube);
+        }
+        
         /* Hero Section */
         .hero {
             text-align: center;
@@ -223,231 +246,222 @@
             color: var(--text-light);
         }
         
-        /* Tool Card */
-        .tool-card {
-            background-color: white;
-            border-radius: var(--border-radius);
-            padding: 2rem;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 2rem;
-        }
-        
-        .tool-card h2 {
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        
-        .tool-card h2 i {
-            color: var(--primary);
-        }
-        
-        /* Tabs */
-        .tab-buttons {
-            display: flex;
-            border-bottom: 1px solid var(--light-dark);
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-        
-        .tab-btn {
-            padding: 0.8rem 1.5rem;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-weight: 500;
-            color: var(--text-light);
-            position: relative;
-            font-size: 0.95rem;
-            transition: var(--transition);
-        }
-        
-        .tab-btn.active {
-            color: var(--primary);
-        }
-        
-        .tab-btn.active::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background-color: var(--primary);
-            border-radius: 3px 3px 0 0;
-        }
-        
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        /* Form Elements */
-        .input-group {
-            display: flex;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-            flex-direction: column;
-        }
-        
-        .input-field {
-            flex: 1;
-            position: relative;
-        }
-        
-        .input-group input, 
-        .input-group textarea {
-            width: 100%;
-            padding: 0.9rem 1.25rem;
-            border: 1px solid var(--light-dark);
-            border-radius: 50px;
-            font-size: 0.95rem;
-            outline: none;
-            transition: var(--transition);
-            background-color: white;
-        }
-        
-        .input-group textarea {
-            border-radius: var(--border-radius);
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        .input-group input:focus, 
-        .input-group textarea:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
-        }
-        
-        /* Progress Bar */
-        .progress-container {
-            width: 100%;
-            background-color: var(--light-dark);
-            border-radius: 50px;
-            margin-bottom: 0.75rem;
-            overflow: hidden;
-        }
-        
-        .progress-bar {
-            height: 8px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            border-radius: 50px;
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-        
-        .progress-text {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            text-align: center;
-        }
-        
-        /* Video Items */
-        .video-item {
-            margin-bottom: 1rem;
-            padding: 1rem;
-            background-color: var(--light);
-            border-radius: var(--border-radius);
-            border: 1px solid var(--light-dark);
-        }
-        
-        .video-preview {
-            width: 100%;
-            border-radius: var(--border-radius);
-            margin: 1rem 0;
-            max-height: 500px;
-            object-fit: contain;
-            background-color: #000;
-        }
-        
-        /* Results */
-        .result-container {
-            margin-top: 2rem;
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .result-container.active {
-            display: block;
-        }
-        
-        .video-result {
-            margin-bottom: 2rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--light-dark);
-        }
-        
-        .video-result:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-        
-        /* Features Grid */
-        .features {
+        /* Dashboard Grid */
+        .dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
             margin: 3rem 0;
         }
         
-        .feature-card {
+        .dashboard-card {
             background-color: white;
-            padding: 2rem;
             border-radius: var(--border-radius);
+            padding: 2rem;
             box-shadow: var(--box-shadow);
-            text-align: center;
             transition: var(--transition);
-            border: 1px solid rgba(0,0,0,0.03);
+            border-top: 4px solid var(--primary);
+            position: relative;
+            overflow: hidden;
         }
         
-        .feature-card:hover {
+        .dashboard-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0,0,0,0.1);
         }
         
-        .feature-card i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1.25rem;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .dashboard-card.tiktok {
+            border-top-color: var(--tiktok);
         }
         
-        .feature-card h3 {
-            margin-bottom: 0.75rem;
+        .dashboard-card.whatsapp {
+            border-top-color: var(--whatsapp);
         }
         
-        /* Loading States */
-        .loading {
-            display: inline-flex;
+        .dashboard-card.telegram {
+            border-top-color: var(--telegram);
+        }
+        
+        .dashboard-card.youtube {
+            border-top-color: var(--youtube);
+        }
+        
+        .card-header {
+            display: flex;
             align-items: center;
-            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .card-icon.tiktok {
+            background-color: var(--tiktok);
+        }
+        
+        .card-icon.whatsapp {
+            background-color: var(--whatsapp);
+        }
+        
+        .card-icon.telegram {
+            background-color: var(--telegram);
+        }
+        
+        .card-icon.youtube {
+            background-color: var(--youtube);
+        }
+        
+        .card-title {
+            flex: 1;
+        }
+        
+        .card-title h3 {
+            margin-bottom: 0.25rem;
+        }
+        
+        .card-title p {
+            font-size: 0.9rem;
             color: var(--text-light);
         }
         
-        .loading-spinner {
-            width: 1.25rem;
-            height: 1.25rem;
-            border: 3px solid rgba(108, 99, 255, 0.2);
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        .card-features {
+            margin-bottom: 1.5rem;
         }
         
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        
+        .feature-item i {
+            color: var(--primary);
+            margin-right: 0.75rem;
+            font-size: 0.9rem;
+        }
+        
+        .card-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+        
+        .card-actions .btn {
+            flex: 1;
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            margin: 3rem 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .stat-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 0.5rem 0;
+        }
+        
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        /* Recent Activity */
+        .activity-section {
+            margin: 3rem 0;
+        }
+        
+        .activity-list {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+        
+        .activity-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--light-dark);
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: white;
+            font-size: 1rem;
+        }
+        
+        .activity-icon.tiktok {
+            background-color: var(--tiktok);
+        }
+        
+        .activity-icon.whatsapp {
+            background-color: var(--whatsapp);
+        }
+        
+        .activity-icon.telegram {
+            background-color: var(--telegram);
+        }
+        
+        .activity-icon.youtube {
+            background-color: var(--youtube);
+        }
+        
+        .activity-details {
+            flex: 1;
+        }
+        
+        .activity-details h4 {
+            margin-bottom: 0.25rem;
+        }
+        
+        .activity-details p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+        
+        .activity-time {
+            font-size: 0.8rem;
+            color: var(--text-light);
         }
         
         /* Footer */
@@ -536,10 +550,6 @@
             .hero h1 {
                 font-size: 2.2rem;
             }
-            
-            .tool-card {
-                padding: 1.5rem;
-            }
         }
         
         @media (max-width: 768px) {
@@ -582,26 +592,6 @@
             .hero p {
                 font-size: 1rem;
             }
-            
-            .tab-buttons {
-                overflow-x: auto;
-                white-space: nowrap;
-                padding-bottom: 5px;
-                scrollbar-width: none;
-            }
-            
-            .tab-buttons::-webkit-scrollbar {
-                display: none;
-            }
-            
-            .tab-btn {
-                padding: 0.7rem 1rem;
-                font-size: 0.9rem;
-            }
-            
-            .feature-card {
-                padding: 1.5rem;
-            }
         }
         
         @media (max-width: 576px) {
@@ -618,12 +608,8 @@
                 padding: 0.9rem;
             }
             
-            .input-group {
-                gap: 0.75rem;
-            }
-            
-            .tool-card {
-                padding: 1.25rem;
+            .card-actions {
+                flex-direction: column;
             }
         }
     </style>
@@ -633,8 +619,8 @@
         <div class="container">
             <nav class="navbar">
                 <a href="index.html" class="logo">
-                    <i class="fas fa-cloud-download-alt"></i>
-                    <span>Jazz Tools</span>
+                    <i class="fas fa-rocket"></i>
+                    <span>Namz Ajz</span>
                 </a>
                 
                 <button class="mobile-menu-btn" id="mobileMenuBtn">
@@ -642,13 +628,12 @@
                 </button>
                 
                 <div class="nav-links" id="navLinks">
-                    <a href="index.html">Home</a>
-                    <a href="instagram_download.html">Instagram Download</a>
-                    <a href="comparison.html">Comparison</a>
-                    <a href="instagram.html">Instagram</a>
+                    <a href="index.html" class="active">Dashboard</a>
+                    <a href="tiktok.html">TikTok</a>
+                    <a href="whatsapp.html">WhatsApp</a>
                     <a href="telegram.html">Telegram</a>
+                    <a href="youtube.html">YouTube</a>
                     <a href="affiliate.html">Affiliate</a>
-                    <a href="whatsapp.html">Whatsapp</a>
                     <a href="login.html" class="btn btn-sm">Login</a>
                 </div>
             </nav>
@@ -658,104 +643,237 @@
     <main>
         <section class="hero">
             <div class="container">
-                <h1>Premium TikTok Video Downloader</h1>
-                <p>Download high-quality TikTok videos without watermarks. Save single videos, multiple clips, or entire profiles with ease.</p>
+                <h1>Namz Ajz Tools Dashboard</h1>
+                <p>Access all premium tools in one place - powerful utilities for TikTok, WhatsApp, Telegram, and YouTube</p>
             </div>
         </section>
         
         <section class="container">
-            <div class="tool-card">
-                <h2><i class="fas fa-download"></i> TikTok Downloader</h2>
-                
-                <!-- Tab Navigation -->
-                <div class="tab-buttons">
-                    <button class="tab-btn active" data-tab="single">Single Video</button>
-                    <button class="tab-btn" data-tab="multiple">Multiple Videos</button>
-                    <button class="tab-btn" data-tab="profile">Profile Download</button>
-                </div>
-                
-                <!-- Single Video Tab -->
-                <div class="tab-content active" id="single">
-                    <p>Download any TikTok video without watermark in HD quality</p>
-                    <div class="input-group">
-                        <input type="text" id="tiktokUrl" placeholder="Paste TikTok video URL here (e.g., https://www.tiktok.com/@username/video/123456789)">
-                        <button class="btn" id="downloadBtn">
-                            <i class="fas fa-download"></i> Download Now
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Multiple Videos Tab -->
-                <div class="tab-content" id="multiple">
-                    <p>Download multiple TikTok videos at once (paste one URL per line)</p>
-                    <div class="input-group">
-                        <textarea id="multipleUrls" placeholder="Paste multiple TikTok URLs here, one per line..."></textarea>
-                        <button class="btn" id="downloadMultipleBtn">
-                            <i class="fas fa-download"></i> Download All Videos
-                        </button>
-                    </div>
-                    <div id="multipleProgress" style="display: none;">
-                        <div class="progress-container">
-                            <div class="progress-bar" id="multipleProgressBar"></div>
+            <div class="dashboard-grid">
+                <!-- TikTok Card -->
+                <div class="dashboard-card tiktok">
+                    <div class="card-header">
+                        <div class="card-icon tiktok">
+                            <i class="fab fa-tiktok"></i>
                         </div>
-                        <p class="progress-text" id="multipleStatus">Preparing downloads...</p>
-                    </div>
-                </div>
-                
-                <!-- Profile Download Tab -->
-                <div class="tab-content" id="profile">
-                    <p>Download all videos from a TikTok profile (public accounts only)</p>
-                    <div class="input-group">
-                        <input type="text" id="profileUsername" placeholder="Enter TikTok username (without @)">
-                        <button class="btn" id="downloadProfileBtn">
-                            <i class="fas fa-user-circle"></i> Fetch Videos
-                        </button>
-                    </div>
-                    <div id="profileResults" style="display: none;">
-                        <h4>Available Videos</h4>
-                        <div id="profileVideoList" style="margin: 1rem 0;"></div>
-                        <div class="input-group">
-                            <button class="btn" id="downloadProfileVideosBtn">
-                                <i class="fas fa-download"></i> Download Selected
-                            </button>
+                        <div class="card-title">
+                            <h3>TikTok Tools</h3>
+                            <p>Download videos without watermark</p>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Loading Indicator -->
-                <div id="loading" style="display: none; text-align: center; padding: 1.5rem;">
-                    <div class="loading">
-                        <div class="loading-spinner"></div>
-                        <span>Processing your request...</span>
+                    <div class="card-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Single video download</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Bulk profile download</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>No watermark HD quality</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="tiktok.html" class="btn btn-tiktok">
+                            <i class="fas fa-external-link-alt"></i> Open Tool
+                        </a>
+                        <a href="#" class="btn btn-outline">
+                            <i class="fas fa-info-circle"></i> Learn More
+                        </a>
                     </div>
                 </div>
                 
-                <!-- Results Container -->
-                <div class="result-container" id="resultContainer">
-                    <h3><i class="fas fa-check-circle" style="color: var(--success);"></i> Download Results</h3>
-                    <div id="downloadResults" style="margin-top: 1.5rem;">
-                        <!-- Results will be inserted here -->
+                <!-- WhatsApp Card -->
+                <div class="dashboard-card whatsapp">
+                    <div class="card-header">
+                        <div class="card-icon whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="card-title">
+                            <h3>WhatsApp Tools</h3>
+                            <p>Business messaging automation</p>
+                        </div>
+                    </div>
+                    <div class="card-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Bulk messaging</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Auto-reply system</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Message templates</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="whatsapp.html" class="btn btn-whatsapp">
+                            <i class="fas fa-external-link-alt"></i> Open Tool
+                        </a>
+                        <a href="#" class="btn btn-outline">
+                            <i class="fas fa-info-circle"></i> Learn More
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Telegram Card -->
+                <div class="dashboard-card telegram">
+                    <div class="card-header">
+                        <div class="card-icon telegram">
+                            <i class="fab fa-telegram"></i>
+                        </div>
+                        <div class="card-title">
+                            <h3>Telegram Tools</h3>
+                            <p>Channel management & automation</p>
+                        </div>
+                    </div>
+                    <div class="card-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Channel analytics</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Bot creator</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Member management</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="telegram.html" class="btn btn-telegram">
+                            <i class="fas fa-external-link-alt"></i> Open Tool
+                        </a>
+                        <a href="#" class="btn btn-outline">
+                            <i class="fas fa-info-circle"></i> Learn More
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- YouTube Card -->
+                <div class="dashboard-card youtube">
+                    <div class="card-header">
+                        <div class="card-icon youtube">
+                            <i class="fab fa-youtube"></i>
+                        </div>
+                        <div class="card-title">
+                            <h3>YouTube Tools</h3>
+                            <p>Video & playlist downloader</p>
+                        </div>
+                    </div>
+                    <div class="card-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Single video download</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Playlist downloader</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Shorts downloader</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="youtube.html" class="btn btn-youtube">
+                            <i class="fas fa-external-link-alt"></i> Open Tool
+                        </a>
+                        <a href="#" class="btn btn-outline">
+                            <i class="fas fa-info-circle"></i> Learn More
+                        </a>
                     </div>
                 </div>
             </div>
             
-            <div class="features">
-                <div class="feature-card">
-                    <i class="fas fa-tachometer-alt"></i>
-                    <h3>Lightning Fast</h3>
-                    <p>Our optimized servers deliver high-speed downloads without watermarks in HD quality.</p>
-                </div>
+            <!-- Stats Section -->
+            <div class="stats-section">
+                <h2>Your Statistics</h2>
+                <p>Overview of your recent activity across all tools</p>
                 
-                <div class="feature-card">
-                    <i class="fas fa-layer-group"></i>
-                    <h3>Bulk Processing</h3>
-                    <p>Download entire profiles or multiple videos with one click. Save hours of manual work.</p>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-download" style="color: var(--primary);"></i>
+                        <div class="stat-value">1,245</div>
+                        <div class="stat-label">Downloads</div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-paper-plane" style="color: var(--primary);"></i>
+                        <div class="stat-value">589</div>
+                        <div class="stat-label">Messages Sent</div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-chart-line" style="color: var(--primary);"></i>
+                        <div class="stat-value">87%</div>
+                        <div class="stat-label">Success Rate</div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-clock" style="color: var(--primary);"></i>
+                        <div class="stat-value">24.5h</div>
+                        <div class="stat-label">Time Saved</div>
+                    </div>
                 </div>
+            </div>
+            
+            <!-- Recent Activity -->
+            <div class="activity-section">
+                <h2>Recent Activity</h2>
+                <p>Your most recent actions across all tools</p>
                 
-                <div class="feature-card">
-                    <i class="fas fa-mobile-alt"></i>
-                    <h3>Mobile Optimized</h3>
-                    <p>Works perfectly on all devices. No app installation needed - works directly in your browser.</p>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="activity-icon tiktok">
+                            <i class="fab fa-tiktok"></i>
+                        </div>
+                        <div class="activity-details">
+                            <h4>Downloaded TikTok Video</h4>
+                            <p>@username/video/123456789</p>
+                        </div>
+                        <div class="activity-time">
+                            10 min ago
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="activity-details">
+                            <h4>Sent Bulk Messages</h4>
+                            <p>To 25 contacts</p>
+                        </div>
+                        <div class="activity-time">
+                            1 hour ago
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon telegram">
+                            <i class="fab fa-telegram"></i>
+                        </div>
+                        <div class="activity-details">
+                            <h4>Created Telegram Bot</h4>
+                            <p>@my_awesome_bot</p>
+                        </div>
+                        <div class="activity-time">
+                            3 hours ago
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon youtube">
+                            <i class="fab fa-youtube"></i>
+                        </div>
+                        <div class="activity-details">
+                            <h4>Downloaded YouTube Playlist</h4>
+                            <p>15 videos from "Awesome Mix"</p>
+                        </div>
+                        <div class="activity-time">
+                            5 hours ago
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -767,24 +885,24 @@
                 <div class="footer-column">
                     <h4>Namz Ajz</h4>
                     <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 1.6;">
-                        The most advanced TikTok downloader tool. Save videos without watermarks in HD quality.
+                        Premium tools for social media management, automation, and content downloading.
                     </p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 
                 <div class="footer-column">
                     <h4>Quick Links</h4>
                     <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="comparison.html">Comparison</a></li>
-                        <li><a href="instagram.html">Instagram Downloader</a></li>
-                        <li><a href="telegram.html">Telegram Tool</a></li>
-                        <li><a href="affiliate.html">Affiliate Program</a></li>
+                        <li><a href="index.html">Dashboard</a></li>
+                        <li><a href="tiktok.html">TikTok Downloader</a></li>
+                        <li><a href="whatsapp.html">WhatsApp Tools</a></li>
+                        <li><a href="telegram.html">Telegram Tools</a></li>
+                        <li><a href="youtube.html">YouTube Downloader</a></li>
                     </ul>
                 </div>
                 
@@ -847,362 +965,6 @@
                     }
                 });
             });
-            
-            // Tab functionality
-            const tabBtns = document.querySelectorAll('.tab-btn');
-            const tabContents = document.querySelectorAll('.tab-content');
-            
-            tabBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    tabBtns.forEach(b => b.classList.remove('active'));
-                    tabContents.forEach(c => c.classList.remove('active'));
-                    
-                    btn.classList.add('active');
-                    const tabId = btn.getAttribute('data-tab');
-                    document.getElementById(tabId).classList.add('active');
-                    
-                    // Clear previous results when switching tabs
-                    hideResultContainer();
-                });
-            });
-
-            // Single video download
-            const downloadBtn = document.getElementById('downloadBtn');
-            downloadBtn.addEventListener('click', downloadSingleVideo);
-
-            // Multiple videos download
-            const downloadMultipleBtn = document.getElementById('downloadMultipleBtn');
-            downloadMultipleBtn.addEventListener('click', downloadMultipleVideos);
-
-            // Profile download
-            const downloadProfileBtn = document.getElementById('downloadProfileBtn');
-            downloadProfileBtn.addEventListener('click', fetchProfileVideos);
-            const downloadProfileVideosBtn = document.getElementById('downloadProfileVideosBtn');
-            downloadProfileVideosBtn.addEventListener('click', downloadProfileVideos);
-
-            async function downloadSingleVideo() {
-                const url = document.getElementById('tiktokUrl').value.trim();
-                
-                if (!isValidTikTokUrl(url)) {
-                    showAlert('Please enter a valid TikTok URL (e.g., https://www.tiktok.com/@username/video/123456789)');
-                    return;
-                }
-                
-                showLoading();
-                hideResultContainer();
-                
-                try {
-                    const videoData = await fetchVideoData(url);
-                    displayDownloadResult([videoData]);
-                } catch (error) {
-                    showAlert('Error: ' + error.message);
-                } finally {
-                    hideLoading();
-                }
-            }
-
-            async function downloadMultipleVideos() {
-                const urlsText = document.getElementById('multipleUrls').value.trim();
-                if (!urlsText) {
-                    showAlert('Please enter at least one TikTok URL');
-                    return;
-                }
-                
-                const urls = urlsText.split('\n').filter(url => url.trim() !== '');
-                const validUrls = urls.filter(url => isValidTikTokUrl(url));
-                
-                if (validUrls.length === 0) {
-                    showAlert('No valid TikTok URLs found. Please check your input and try again.');
-                    return;
-                }
-                
-                showMultipleProgress(validUrls.length);
-                hideResultContainer();
-                
-                try {
-                    const results = [];
-                    for (let i = 0; i < validUrls.length; i++) {
-                        updateMultipleProgress(i + 1, validUrls.length, `Processing video ${i + 1} of ${validUrls.length}`);
-                        
-                        try {
-                            const videoData = await fetchVideoData(validUrls[i]);
-                            results.push(videoData);
-                        } catch (error) {
-                            console.error(`Failed to download ${validUrls[i]}:`, error);
-                            // Continue with next video even if one fails
-                        }
-                        
-                        // Add slight delay between requests to avoid rate limiting
-                        if (i < validUrls.length - 1) {
-                            await new Promise(resolve => setTimeout(resolve, 500));
-                        }
-                    }
-                    
-                    if (results.length > 0) {
-                        displayDownloadResult(results);
-                    } else {
-                        showAlert('No videos were downloaded successfully. Please check your URLs and try again.');
-                    }
-                } catch (error) {
-                    showAlert('Error during batch download: ' + error.message);
-                } finally {
-                    hideMultipleProgress();
-                }
-            }
-
-            async function fetchProfileVideos() {
-                const username = document.getElementById('profileUsername').value.trim();
-                if (!username) {
-                    showAlert('Please enter a TikTok username');
-                    return;
-                }
-                
-                showLoading();
-                hideResultContainer();
-                
-                try {
-                    // In a real implementation, you would need a backend service to scrape profile videos
-                    const profileVideos = await fetchProfileVideosFromAPI(username);
-                    
-                    const videoList = document.getElementById('profileVideoList');
-                    videoList.innerHTML = '';
-                    
-                    if (profileVideos.length === 0) {
-                        videoList.innerHTML = '<p style="color: var(--text-light); text-align: center;">No videos found for this profile</p>';
-                        return;
-                    }
-                    
-                    // Add select all checkbox
-                    const selectAllItem = document.createElement('div');
-                    selectAllItem.className = 'video-item';
-                    selectAllItem.innerHTML = `
-                        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-                            <input type="checkbox" id="selectAllVideos" checked style="margin-right: 0.5rem;">
-                            <label for="selectAllVideos" style="font-weight: 500;">Select All Videos</label>
-                        </div>
-                    `;
-                    videoList.appendChild(selectAllItem);
-                    
-                    // Add toggle functionality for select all
-                    const selectAllCheckbox = document.getElementById('selectAllVideos');
-                    selectAllCheckbox.addEventListener('change', function() {
-                        document.querySelectorAll('.video-checkbox').forEach(checkbox => {
-                            checkbox.checked = this.checked;
-                        });
-                    });
-                    
-                    // Add profile videos
-                    profileVideos.forEach((video, index) => {
-                        const videoItem = document.createElement('div');
-                        videoItem.className = 'video-item';
-                        videoItem.innerHTML = `
-                            <div style="display: flex; align-items: center; margin-bottom: ${index === profileVideos.length - 1 ? '0' : '0.5rem'};">
-                                <input type="checkbox" class="video-checkbox" checked 
-                                       data-url="${video.url}" 
-                                       data-id="${video.id}"
-                                       style="margin-right: 0.5rem;">
-                                <img src="${video.thumbnail}" width="60" style="border-radius: 4px; margin-right: 1rem;">
-                                <div style="flex: 1; overflow: hidden;">
-                                    <p style="font-size: 0.85rem; margin-bottom: 0.25rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${video.description || 'TikTok video'}</p>
-                                    <p style="font-size: 0.75rem; color: var(--text-light);">${formatDate(video.date)} • ${video.views} views</p>
-                                </div>
-                            </div>
-                        `;
-                        videoList.appendChild(videoItem);
-                    });
-                    
-                    document.getElementById('profileResults').style.display = 'block';
-                } catch (error) {
-                    showAlert('Error fetching profile videos: ' + error.message);
-                } finally {
-                    hideLoading();
-                }
-            }
-
-            async function downloadProfileVideos() {
-                const checkboxes = document.querySelectorAll('.video-checkbox:checked');
-                if (checkboxes.length === 0) {
-                    showAlert('Please select at least one video to download');
-                    return;
-                }
-                
-                const videosToDownload = Array.from(checkboxes).map(checkbox => ({
-                    url: checkbox.dataset.url,
-                    id: checkbox.dataset.id
-                }));
-                
-                showMultipleProgress(videosToDownload.length);
-                hideResultContainer();
-                
-                try {
-                    const results = [];
-                    for (let i = 0; i < videosToDownload.length; i++) {
-                        updateMultipleProgress(i + 1, videosToDownload.length, 
-                            `Processing video ${i + 1} of ${videosToDownload.length}`);
-                        
-                        try {
-                            const videoData = await fetchVideoData(videosToDownload[i].url);
-                            results.push(videoData);
-                        } catch (error) {
-                            console.error(`Failed to download video ${videosToDownload[i].id}:`, error);
-                        }
-                        
-                        // Add slight delay between requests to avoid rate limiting
-                        if (i < videosToDownload.length - 1) {
-                            await new Promise(resolve => setTimeout(resolve, 500));
-                        }
-                    }
-                    
-                    if (results.length > 0) {
-                        displayDownloadResult(results);
-                    } else {
-                        showAlert('No videos were downloaded successfully. Please try again.');
-                    }
-                } catch (error) {
-                    showAlert('Error during profile download: ' + error.message);
-                } finally {
-                    hideMultipleProgress();
-                }
-            }
-
-            // Helper functions
-            function isValidTikTokUrl(url) {
-                return url.includes('tiktok.com') && 
-                      (url.includes('/video/') || url.includes('/v/'));
-            }
-
-            async function fetchVideoData(url) {
-                // In production, you would use your own backend API
-                // This example uses a free API (note: may have limitations)
-                const apiUrl = `https://www.tikwm.com/api/?url=${encodeURIComponent(url)}`;
-                
-                const response = await fetch(apiUrl);
-                const data = await response.json();
-                
-                if (data.data && data.data.play) {
-                    return {
-                        url: data.data.play,
-                        thumbnail: data.data.cover,
-                        title: data.data.title || 'TikTok Video',
-                        downloadUrl: data.data.play,
-                        author: data.data.author || 'TikTok User'
-                    };
-                }
-                
-                throw new Error('Failed to fetch video data. The video may be private or unavailable.');
-            }
-
-            async function fetchProfileVideosFromAPI(username) {
-                // This is a mock implementation - in production you would need:
-                // 1. A backend service that can scrape TikTok profiles
-                // 2. Proper error handling and rate limiting
-                
-                // Simulate API delay
-                await new Promise(resolve => setTimeout(resolve, 1500));
-                
-                // Mock data - in reality you would fetch this from a backend service
-                const mockVideos = [];
-                const videoCount = Math.floor(Math.random() * 10) + 3; // 3-12 mock videos
-                const currentDate = new Date();
-                
-                for (let i = 1; i <= videoCount; i++) {
-                    const randomDays = Math.floor(Math.random() * 30);
-                    const videoDate = new Date(currentDate);
-                    videoDate.setDate(currentDate.getDate() - randomDays);
-                    
-                    mockVideos.push({
-                        id: `${Math.floor(Math.random() * 100000000)}`,
-                        url: `https://www.tiktok.com/@${username}/video/${Math.floor(Math.random() * 100000000)}`,
-                        thumbnail: `https://picsum.photos/200/300?random=${i}`,
-                        description: `TikTok video #${i} from @${username}`,
-                        date: videoDate.toISOString(),
-                        views: `${Math.floor(Math.random() * 1000000).toLocaleString()}`
-                    });
-                }
-                
-                return mockVideos;
-            }
-
-            function formatDate(dateString) {
-                const date = new Date(dateString);
-                return date.toLocaleDateString('en-US', { 
-                    year: 'numeric', 
-                    month: 'short', 
-                    day: 'numeric' 
-                });
-            }
-
-            function displayDownloadResult(videos) {
-                const resultsContainer = document.getElementById('downloadResults');
-                resultsContainer.innerHTML = '';
-                
-                videos.forEach(video => {
-                    const videoElement = document.createElement('div');
-                    videoElement.className = 'video-result';
-                    videoElement.innerHTML = `
-                        <div style="margin-bottom: 1.5rem;">
-                            <div style="display: flex; align-items: center; margin-bottom: 0.75rem;">
-                                <div style="width: 40px; height: 40px; border-radius: 50%; background-color: var(--light-dark); margin-right: 0.75rem;"></div>
-                                <div>
-                                    <h4 style="font-size: 1rem; margin-bottom: 0.25rem;">${video.author}</h4>
-                                    <p style="font-size: 0.85rem; color: var(--text-light);">Original TikTok</p>
-                                </div>
-                            </div>
-                            <p style="margin-bottom: 1rem;">${video.title}</p>
-                            <video controls src="${video.url}" class="video-preview"></video>
-                        </div>
-                        <div style="display: flex; gap: 0.75rem;">
-                            <a href="${video.downloadUrl}" class="btn" download="tiktok_${Date.now()}.mp4" style="flex: 1;">
-                                <i class="fas fa-download"></i> Download HD
-                            </a>
-                            <button class="btn btn-outline" style="flex: 1;">
-                                <i class="fas fa-share-alt"></i> Share
-                            </button>
-                        </div>
-                    `;
-                    resultsContainer.appendChild(videoElement);
-                });
-                
-                document.getElementById('resultContainer').classList.add('active');
-                
-                // Scroll to results
-                document.getElementById('resultContainer').scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-
-            function showLoading() {
-                document.getElementById('loading').style.display = 'block';
-            }
-
-            function hideLoading() {
-                document.getElementById('loading').style.display = 'none';
-            }
-
-            function showMultipleProgress(total) {
-                document.getElementById('multipleProgress').style.display = 'block';
-                updateMultipleProgress(0, total, 'Starting downloads...');
-            }
-
-            function updateMultipleProgress(current, total, message) {
-                const progressPercent = Math.round((current / total) * 100);
-                document.getElementById('multipleProgressBar').style.width = `${progressPercent}%`;
-                document.getElementById('multipleStatus').textContent = message;
-            }
-
-            function hideMultipleProgress() {
-                document.getElementById('multipleProgress').style.display = 'none';
-            }
-
-            function hideResultContainer() {
-                document.getElementById('resultContainer').classList.remove('active');
-                document.getElementById('downloadResults').innerHTML = '';
-            }
-
-            function showAlert(message) {
-                // In a real app, you might use a more sophisticated alert/notification system
-                alert(message);
-            }
         });
     </script>
 </body>
