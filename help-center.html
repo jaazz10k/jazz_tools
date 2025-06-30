@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Same head content as index.html -->
+    <title>Namz Ajz - Help Center</title>
+    <meta name="description" content="Get help with Namz Ajz tools - FAQs, guides, and support">
+    <!-- Include the same CSS and scripts -->
+    <style>
+        /* Additional styles for help center */
+        .help-section {
+            margin: 3rem 0;
+        }
+        
+        .faq-category {
+            margin-bottom: 2rem;
+        }
+        
+        .faq-item {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--box-shadow);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .faq-item:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+        }
+        
+        .faq-answer {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--light-dark);
+            display: none;
+        }
+        
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+        
+        .contact-form {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            margin-top: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--light-dark);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Same header as index.html -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-rocket"></i>
+                    <span>Namz Ajz</span>
+                </a>
+                <div class="nav-links" id="navLinks">
+                    <a href="index.html">Dashboard</a>
+                    <a href="tiktok.html">TikTok</a>
+                    <a href="whatsapp.html">WhatsApp</a>
+                    <a href="telegram.html">Telegram</a>
+                    <a href="youtube.html">YouTube</a>
+                    <a href="help-center.html" class="active">Help Center</a>
+                    <a href="login.html" class="btn btn-sm">Login</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Help Center</h1>
+                <p>Find answers to common questions or contact our support team</p>
+            </div>
+        </section>
+        
+        <section class="container help-section">
+            <h2>Frequently Asked Questions</h2>
+            <p>Browse through our most common questions and answers</p>
+            
+            <div class="faq-category">
+                <h3>TikTok Tools</h3>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I download TikTok videos without watermark?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Simply paste the TikTok video URL in our downloader tool and click "Download". Our system will process the video and provide you with a watermark-free version.</p>
+                    </div>
+                </div>
+                <!-- More FAQ items -->
+            </div>
+            
+            <div class="faq-category">
+                <h3>WhatsApp Tools</h3>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is bulk messaging against WhatsApp's terms?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>WhatsApp has strict policies against spam. Our tool is designed for legitimate business communication with consent from recipients. Always comply with WhatsApp's policies.</p>
+                    </div>
+                </div>
+                <!-- More FAQ items -->
+            </div>
+            
+            <h2 style="margin-top: 3rem;">Contact Support</h2>
+            <p>Can't find what you're looking for? Send us a message</p>
+            
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <select id="subject">
+                            <option>Technical Support</option>
+                            <option>Billing Inquiry</option>
+                            <option>Feature Request</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Same footer as index.html -->
+    
+    <script>
+        // FAQ toggle functionality
+        document.querySelectorAll('.faq-item').forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                item.classList.toggle('active');
+                const icon = question.querySelector('i');
+                icon.classList.toggle('fa-chevron-down');
+                icon.classList.toggle('fa-chevron-up');
+            });
+        });
+        
+        // Include the same mobile menu script from index.html
+    </script>
+</body>
+</html>
